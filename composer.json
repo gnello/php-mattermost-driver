@@ -1,0 +1,31 @@
+{
+    "name": "gnello/php-mattermost-restapi",
+    "description": "Manage Mattermost Rest API Server",
+    "keywords": ["mattermost", "chat"],
+    "homepage": "https://github.com/gnello/php-mattermost-driver",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Luca Agnello",
+            "email": "luca@gnello.com"
+        }
+    ],
+    "support": {
+        "email": "luca@gnello.com",
+        "issues": "https://github.com/gnello/php-mattermost-driver/issues"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "psr/http-message" : "^1.0",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "symfony/var-dumper": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gnello\\MattermostDriver\\": "src/"
+        }
+    }
+}
