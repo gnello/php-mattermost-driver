@@ -3,7 +3,7 @@
     "description": "Manage Mattermost Rest API Server",
     "keywords": ["mattermost", "chat"],
     "homepage": "https://github.com/gnello/php-mattermost-driver",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Luca Agnello",
@@ -17,6 +17,7 @@
     "require": {
         "php": ">=5.4.0",
         "psr/http-message" : "^1.0",
+        "pimple/pimple"    : "~3.0",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
@@ -25,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Gnello\\MattermostDriver\\": "src/"
+            "Gnello\\Mattermost\\": "src/"
         }
     }
 }
