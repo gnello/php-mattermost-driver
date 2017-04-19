@@ -1,7 +1,6 @@
 # php-mattermost-driver (v3.7.0)
 
-Completed Php Driver to interact with the Mattermost Web Service API.
-
+Completed Php Driver to interact with the [Mattermost Web Service API][4].  
 Version of the Mattermost server required: 3.7.0
 
 Please read [the api documentation][1] for further information on using this application.
@@ -71,12 +70,12 @@ $res = $driver->getUserModel()->getUserByUsername('username');
 In Development, coming soon!
 
 ## ToDo
-*[ ] Add Team data model (in development)
-*[ ] Add Channel data model
-*[ ] Add Post data model
-*[ ] Add File data model
-*[ ] Add Admin data model
-*[ ] Add Preference data model
+[ ] Add Team data model (in development)  
+[ ] Add Channel data model  
+[ ] Add Post data model  
+[ ] Add File data model  
+[ ] Add Admin data model  
+[ ] Add Preference data model
 
 ## Contact
 - luca@gnello.com
@@ -84,3 +83,4 @@ In Development, coming soon!
 [1]: https://api.mattermost.com/
 [2]: http://www.php-fig.org/psr/psr-7/
 [3]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
+[4]: https://about.mattermost.com/
