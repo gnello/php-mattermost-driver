@@ -1,8 +1,8 @@
 # php-mattermost-driver (v3.7.0)
 
-Completed Php Driver to interact with the [Mattermost Web Service API][4].
+Completed Php Driver to interact with the [Mattermost Web Service API][4].  
+Version of the Mattermost server required: 3.7.0
 
-Version of the Mattermost server required: 3.7.0  
 Please read [the api documentation][1] for further information on using this application.
 
 ## Installation
@@ -31,13 +31,7 @@ Read more about how to install and use Composer on your local machine [here][3].
  ]);
  
  $driver = new Driver($container);
- $login = $driver->authenticate();
- 
- if ($login) {
-    echo "SUCCESS!";
- } else {
-    echo "SOMETHING WENT WRONG.";
- }
+ $result = $driver->authenticate();
  ```
 
 ### Check results
@@ -63,7 +57,7 @@ $requestOptions = [
 $result = $driver->getUserModel()->createUser($requestOptions);
 
 //Get a user
-$res = $driver->getUserModel()->getUserByUsername('username');
+$result = $driver->getUserModel()->getUserByUsername('username');
 ```
 
 ### Team data model

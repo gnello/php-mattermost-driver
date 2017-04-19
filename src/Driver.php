@@ -62,7 +62,7 @@ class Driver
     }
 
     /**
-     * @return bool
+     * @return null|\Psr\Http\Message\ResponseInterface
      */
     public function authenticate()
     {
@@ -75,16 +75,13 @@ class Driver
         /** @var Client $client */
         $client = $this->container['client'];
         $response = $client->post('/users/login', $options);
-        $statusCode = $response->getStatusCode();
 
-        if ($statusCode == 200) {
+        if ($response->getStatusCode() == 200) {
             $token = $response->getHeader('Token')[0];
             $client->setToken($token);
-
-            return true;
         }
 
-        return false;
+        return $response;
     }
 
     /**
