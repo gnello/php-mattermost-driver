@@ -1,8 +1,8 @@
 # php-mattermost-driver (v3.7.0)
 
-Completed Php Driver to interact with the [Mattermost Web Service API][4].  
-Version of the Mattermost server required: 3.7.0
+Completed Php Driver to interact with the [Mattermost Web Service API][4].
 
+Version of the Mattermost server required: 3.7.0  
 Please read [the api documentation][1] for further information on using this application.
 
 ## Installation
