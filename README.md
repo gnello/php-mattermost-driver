@@ -1,6 +1,8 @@
-# php-mattermost-driver
+# php-mattermost-driver (v3.7.0)
 
-Complete Php Driver to interact with the Mattermost Web Service API.
+Completed Php Driver to interact with the Mattermost Web Service API.
+
+Version of the Mattermost server required: 3.7.0
 
 Please read [the api documentation][1] for further information on using this application.
 
@@ -12,7 +14,7 @@ The best way to install php-mattermost-driver is to use Composer:
 composer require gnello/php-mattermost-driver
 ```
 
-Read more about how to install and use Composer on your local machine [here][9].
+Read more about how to install and use Composer on your local machine [here][3].
 
 ## Usage
 ### Authentication
@@ -25,7 +27,7 @@ Read more about how to install and use Composer on your local machine [here][9].
          'password'  => 'your_password',
      ],
      'guzzle'    => [
-         'verify' => false
+         //put here any options for Guzzle
      ]
  ]);
  
@@ -39,25 +41,46 @@ Read more about how to install and use Composer on your local machine [here][9].
  }
  ```
 
-### Check result
-This Driver follow the [PSR-7][2] document
+### Check results
+This Driver follows the [PSR-7][2] document therefore any response is a ResponseInterface type:
 
 ```php
-if($result['response']) {
-    echo $result['output'];
+if ($result->getStatusCode() == 200) {
+    echo "Everything is ok.";
+    var_dump(json_decode($result->getBody()));
 } else {
-    echo 'Error!';
+    echo "HTTP ERROR " . $result->getStatusCode();
 }
+
 ```
-### Users
+### User data model
 ```php
 //Add a new user
-$properties = array('key1' => 'value1', 'key2' => 'value2');
-$result = $driver->getUserModel()->createUser($properties);
+$requestOptions = [
+    'email' => 'test@test.com', 
+    'username' => 'test', 
+    'password' => 'testpsw'
+];
+$result = $driver->getUserModel()->createUser($requestOptions);
+
+//Get a user
+$res = $driver->getUserModel()->getUserByUsername('username');
 ```
 
+### Team data model
+In Development, coming soon!
+
+## ToDo
+*[ ] Add Team data model (in development)
+*[ ] Add Channel data model
+*[ ] Add Post data model
+*[ ] Add File data model
+*[ ] Add Admin data model
+*[ ] Add Preference data model
+
 ## Contact
-- gnello luca@gnello.com
+- luca@gnello.com
 
 [1]: https://api.mattermost.com/
 [2]: http://www.php-fig.org/psr/psr-7/
+[3]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx

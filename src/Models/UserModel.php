@@ -1,4 +1,14 @@
 <?php
+/**
+ * This Driver is based entirely on official documentation of the Mattermost Web
+ * Services API and you can extend it by following the directives of the documentation.
+ *
+ * God bless this mess.
+ *
+ * @author Luca Agnello <luca@gnello.com>
+ * @link https://api.mattermost.com/
+ */
+
 namespace Gnello\Mattermost\Models;
 
 /**
@@ -66,7 +76,7 @@ class UserModel extends AbstractModel
      */
     public function getUsersListOfTeam($team_id, $offset, $limit)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
+        $uri = '/teams/' . $team_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
     }
 
@@ -115,7 +125,7 @@ class UserModel extends AbstractModel
      */
     public function getUserOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
+        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
     }
 
@@ -128,7 +138,7 @@ class UserModel extends AbstractModel
      */
     public function getUserNotOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
+        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
         return $this->client->post($uri);
     }
 
@@ -211,7 +221,7 @@ class UserModel extends AbstractModel
      */
     public function autocompleteUsersOfTeam($team_id, array $requestOptions)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/autocomplete';
+        $uri = '/teams/' . $team_id . '/' . self::$endpoint . '/autocomplete';
         return $this->client->get($uri, $requestOptions);
     }
 
@@ -223,7 +233,7 @@ class UserModel extends AbstractModel
      */
     public function autocompleteUsersOfChannel($team_id, $channel_id, array $requestOptions)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
+        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
         return $this->client->get($uri, $requestOptions);
     }
 }
