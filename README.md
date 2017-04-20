@@ -64,7 +64,7 @@ $result = $driver->getUserModel()->getUserByUsername('username');
 ```php
 //Add a new team
 $requestOptions = [
-    'name'  => 'new_team',
+    'name' => 'new_team',
     'display_name'  => 'New Team',
     'type'  => 'O',
 ];
@@ -76,7 +76,7 @@ $result = $driver->getTeamModel()->getTeamByName('new_team');
 ```
 
 ## ToDo
-[x] Add Team data model
+[x] Add Team data model  
 [ ] Add Channel data model (in development)  
 [ ] Add Post data model  
 [ ] Add File data model  
