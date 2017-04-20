@@ -50,7 +50,7 @@ if ($result->getStatusCode() == 200) {
 ```php
 //Add a new user
 $requestOptions = [
-    'email' => 'test@test.com', 
+    'email'    => 'test@test.com', 
     'username' => 'test', 
     'password' => 'testpsw'
 ];
@@ -64,9 +64,9 @@ $result = $driver->getUserModel()->getUserByUsername('username');
 ```php
 //Add a new team
 $requestOptions = [
-    'name' => 'new_team',
-    'display_name'  => 'New Team',
-    'type'  => 'O',
+    'name'         => 'new_team',
+    'display_name' => 'New Team',
+    'type'         => 'O',
 ];
 $result = $driver->getTeamModel()->createTeam($requestOptions);
 
