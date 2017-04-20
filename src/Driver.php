@@ -11,6 +11,7 @@
 
 namespace Gnello\Mattermost;
 
+use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Pimple\Container;
 
@@ -94,5 +95,17 @@ class Driver
         }
 
         return $this->models['user'];
+    }
+
+    /**
+     * @return TeamModel
+     */
+    public function getTeamModel()
+    {
+        if (!isset($this->models['team'])) {
+            $this->models['team'] = new TeamModel($this->container['client']);
+        }
+
+        return $this->models['team'];
     }
 }
