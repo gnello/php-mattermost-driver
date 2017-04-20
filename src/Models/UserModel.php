@@ -76,7 +76,7 @@ class UserModel extends AbstractModel
      */
     public function getUsersListOfTeam($team_id, $offset, $limit)
     {
-        $uri = '/teams/' . $team_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
+        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
     }
 
@@ -113,7 +113,7 @@ class UserModel extends AbstractModel
      */
     public function getUsersListByIds(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/ids/', $requestOptions);
+        return $this->client->post(self::$endpoint . '/ids', $requestOptions);
     }
 
     /**
@@ -125,7 +125,7 @@ class UserModel extends AbstractModel
      */
     public function getUserOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
+        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
     }
 
@@ -138,7 +138,7 @@ class UserModel extends AbstractModel
      */
     public function getUserNotOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
+        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
         return $this->client->post($uri);
     }
 
@@ -221,7 +221,7 @@ class UserModel extends AbstractModel
      */
     public function autocompleteUsersOfTeam($team_id, array $requestOptions)
     {
-        $uri = '/teams/' . $team_id . '/' . self::$endpoint . '/autocomplete';
+        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/autocomplete';
         return $this->client->get($uri, $requestOptions);
     }
 
@@ -233,7 +233,7 @@ class UserModel extends AbstractModel
      */
     public function autocompleteUsersOfChannel($team_id, $channel_id, array $requestOptions)
     {
-        $uri = '/teams/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
+        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
         return $this->client->get($uri, $requestOptions);
     }
 }
