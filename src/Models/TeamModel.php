@@ -41,12 +41,50 @@ class TeamModel extends AbstractModel
     }
 
     /**
-     * @param $team_id
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getGetTeamMembers($team_id)
+    public function getAllTeamsUserIsMemberOf()
     {
-        return $this->client->get(self::$endpoint . '/members/' . $team_id);
+        return $this->client->get(self::$endpoint . '/members');
+    }
+
+    /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getCountUnreadMessagesAndMentionsInTeamsUserIsMemberOf()
+    {
+        return $this->client->get(self::$endpoint . '/unread');
+    }
+
+    /**
+     * @param $team_id
+     * @param $offset
+     * @param $limit
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getTeamMembers($team_id, $offset, $limit)
+    {
+        return $this->client->get(self::$endpoint . '/' . $team_id . '/members/' . $offset . '/' . $limit);
+    }
+
+    /**
+     * @param $team_id
+     * @param $userId
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getSingleTeamMember($team_id, $userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $team_id . '/members/' . $userId);
+    }
+
+    /**
+     * @param       $team_id
+     * @param array $requestOptions
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getTeamMembersByIds($team_id, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $team_id . '/members/ids', $requestOptions);
     }
 
     /**
@@ -59,32 +97,59 @@ class TeamModel extends AbstractModel
     }
 
     /**
+     * @param $teamName
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getTeamByName($teamName)
+    {
+        return $this->client->get(self::$endpoint . '/name/' . $teamName);
+    }
+
+    /**
      * @param       $team_id
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function updateTeam($team_id, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/teams/' . $team_id . '/update', $requestOptions);
+        return $this->client->post(self::$endpoint . '/' . $team_id . '/update', $requestOptions);
+    }
+
+    /**
+     * @param       $team_id
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getStatsOfTeam($team_id)
+    {
+        return $this->client->get(self::$endpoint . '/' . $team_id . '/stats');
     }
 
     /**
      * @param $team_id
-     * @param $user_id
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function addUser($team_id, $user_id)
+    public function addUser($team_id, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/teams/' . $team_id . '/add_user_to_team', compact('user_id'));
+        return $this->client->post(self::$endpoint . '/' . $team_id . '/add_user_to_team', $requestOptions);
     }
 
     /**
-     * @param $team_id
-     * @param $user_id
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param       $team_id
+     * @param array $requestOptions
+     * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function removeUser($team_id, $user_id)
+    public function removeUser($team_id, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/teams/' . $team_id . '/remove_user_from_team', compact('user_id'));
+        return $this->client->post(self::$endpoint . '/' . $team_id . '/remove_user_from_team', $requestOptions);
+    }
+
+    /**
+     * @param       $team_id
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getAllSlashCommandsOfTeam($team_id)
+    {
+        return $this->client->get(self::$endpoint . '/' . $team_id . '/commands/list_team_commands');
     }
 }
