@@ -3,6 +3,10 @@
  * This Driver is based entirely on official documentation of the Mattermost Web
  * Services API and you can extend it by following the directives of the documentation.
  *
+ * For the full copyright and license information, please read the LICENSE.txt
+ * file that was distributed with this source code. For the full list of
+ * contributors, visit https://github.com/gnello/php-mattermost-driver/contributors
+ *
  * God bless this mess.
  *
  * @author Luca Agnello <luca@gnello.com>
@@ -125,7 +129,7 @@ class UserModel extends AbstractModel
      */
     public function getUserOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
+        $uri = TeamModel::$endpoint . '/' . $team_id . ChannelModel::$endpoint . '/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
     }
 
@@ -138,7 +142,7 @@ class UserModel extends AbstractModel
      */
     public function getUserNotOfChannel($team_id, $channel_id, $offset, $limit)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
+        $uri = TeamModel::$endpoint . '/' . $team_id . ChannelModel::$endpoint . '/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
         return $this->client->post($uri);
     }
 
@@ -233,7 +237,7 @@ class UserModel extends AbstractModel
      */
     public function autocompleteUsersOfChannel($team_id, $channel_id, array $requestOptions)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
+        $uri = TeamModel::$endpoint . '/' . $team_id . ChannelModel::$endpoint . '/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
         return $this->client->get($uri, $requestOptions);
     }
 }

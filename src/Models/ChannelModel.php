@@ -15,27 +15,25 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
-
 /**
- * Class AbstractModel
+ * Class ChannelModel
  *
- * @package Gnello\Mattermost
+ * @package Gnello\Mattermost\Models
  */
-abstract class AbstractModel
+class ChannelModel extends AbstractModel
 {
     /**
-     * @var Client
+     * @var string
      */
-    protected $client;
+    public static $endpoint = '/channels';
 
     /**
-     * AbstractModel constructor.
-     *
-     * @param Client $client
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function __construct(Client $client)
+    public function createChannel($teamId, array $requestOptions)
     {
-        $this->client = $client;
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/create', $requestOptions);
     }
 }
