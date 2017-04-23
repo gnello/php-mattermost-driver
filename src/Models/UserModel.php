@@ -123,7 +123,7 @@ class UserModel extends AbstractModel
      * @param $limit
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserOfChannel($team_id, $channel_id, $offset, $limit)
+    public function getUserInChannel($team_id, $channel_id, $offset, $limit)
     {
         $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
         return $this->client->get($uri);
@@ -136,7 +136,7 @@ class UserModel extends AbstractModel
      * @param $limit
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserNotOfChannel($team_id, $channel_id, $offset, $limit)
+    public function getUserNotInChannel($team_id, $channel_id, $offset, $limit)
     {
         $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
         return $this->client->post($uri);
@@ -200,7 +200,7 @@ class UserModel extends AbstractModel
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function restUserPassword(array $requestOptions)
+    public function resetUserPassword(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/reset_password', $requestOptions);
     }

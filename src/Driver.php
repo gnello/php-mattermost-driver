@@ -11,6 +11,7 @@
 
 namespace Gnello\Mattermost;
 
+use Gnello\Mattermost\Models\ChannelModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Pimple\Container;
@@ -107,5 +108,18 @@ class Driver
         }
 
         return $this->models['team'];
+    }
+
+    /**
+     * @param $teamId
+     * @return ChannelModel
+     */
+    public function getChannelModel($teamId)
+    {
+        if (!isset($this->models['channel'])) {
+            $this->models['channel'] = new ChannelModel($this->container['client'], $teamId);
+        }
+
+        return $this->models['channel'];
     }
 }
