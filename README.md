@@ -78,7 +78,7 @@ $result = $driver->getTeamModel()->getTeamByName('new_team');
 ### Channel data model
 ```php
 //Create a channel
-$teamID = 'team_id_to_add_the_channel_to';
+$teamId = 'team_id_to_add_the_channel_to';
 $requestOptions = [
     'name'         => 'new_channel',
     'display_name' => 'New Channel',
@@ -88,7 +88,7 @@ $result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
 
 
 //Get a channel
-$teamID = 'team_id_of_the_channels_to_return';
+$teamId = 'team_id_of_the_channels_to_return';
 $result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
 ```
 
