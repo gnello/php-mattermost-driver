@@ -75,10 +75,27 @@ $result = $driver->getTeamModel()->createTeam($requestOptions);
 $result = $driver->getTeamModel()->getTeamByName('new_team');
 ```
 
+### Channel data model
+```php
+//Create a channel
+$teamID = 'team_id_to_add_the_channel_to';
+$requestOptions = [
+    'name'         => 'new_channel',
+    'display_name' => 'New Channel',
+    'type'         => 'O',
+];
+$result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
+
+
+//Get a channel
+$teamID = 'team_id_of_the_channels_to_return';
+$result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
+```
+
 ## ToDo
 [x] Add Team data model  
-[ ] Add Channel data model (in development)  
-[ ] Add Post data model  
+[x] Add Channel data model  
+[ ] Add Post data model (in development)  
 [ ] Add File data model  
 [ ] Add Admin data model  
 [ ] Add Preference data model
