@@ -103,7 +103,7 @@ $result = $driver->getPostModel($teamId)->createPost($channelId, $requestOptions
 
 
 //Get a post
-$teamID = 'team_id_of_the_post_to_return';
+$teamId = 'team_id_of_the_post_to_return';
 $channelId = 'channel_id_of_the_post_to_return';
 $postId = 'post_id_of_the_post_to_return';
 $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
