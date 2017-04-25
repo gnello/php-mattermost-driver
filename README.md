@@ -94,25 +94,25 @@ $result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
 ### Post data model
 ```php
 //Create a post
-$teamId = 'team_id_to_add_the_channel_to';
-$channelId = 'team_id_to_add_the_channel_to';
+$teamId = 'team_id_to_create_the_post_to';
+$channelId = 'channel_id_to_create_the_post_to';
 $requestOptions = [
-    'name'         => 'new_channel',
-    'display_name' => 'New Channel',
-    'type'         => 'O',
+    'message'   => 'hello world!'
 ];
-$result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
+$result = $driver->getPostModel($teamId)->createPost($channelId, $requestOptions);
 
 
-//Get a channel
-$teamID = 'team_id_of_the_channels_to_return';
-$result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
+//Get a post
+$teamID = 'team_id_of_the_post_to_return';
+$channelId = 'channel_id_of_the_post_to_return';
+$postId = 'post_id_of_the_post_to_return';
+$result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 ```
 
 ## ToDo
 [x] Add Team data model  
 [x] Add Channel data model  
-[ ] Add Post data model (in development)  
+[x] Add Post data model (in development)  
 [ ] Add File data model  
 [ ] Add Admin data model  
 [ ] Add Preference data model

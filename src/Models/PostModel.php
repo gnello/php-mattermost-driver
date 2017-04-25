@@ -38,11 +38,11 @@ class PostModel extends AbstractModel
      * ChannelModel constructor.
      *
      * @param Client $client
-     * @param        $teamID
+     * @param        $teamId
      */
-    public function __construct(Client $client, $teamID)
+    public function __construct(Client $client, $teamId)
     {
-        $this->teamId = $teamID;
+        $this->teamId = $teamId;
         parent::__construct($client);
     }
 

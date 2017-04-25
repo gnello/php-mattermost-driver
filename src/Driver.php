@@ -65,7 +65,7 @@ class Driver
     }
 
     /**
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function authenticate()
     {
