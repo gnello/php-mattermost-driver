@@ -1,7 +1,6 @@
-# php-mattermost-driver (v3.7.0)
+# php-mattermost-driver (v3)
 
 Completed Php Driver to interact with the [Mattermost Web Service API][4].  
-Version of the Mattermost server required: 3.7.0
 
 Please read [the api documentation][1] for further information on using this application.
 
@@ -79,6 +78,24 @@ $result = $driver->getTeamModel()->getTeamByName('new_team');
 ```php
 //Create a channel
 $teamID = 'team_id_to_add_the_channel_to';
+$requestOptions = [
+    'name'         => 'new_channel',
+    'display_name' => 'New Channel',
+    'type'         => 'O',
+];
+$result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
+
+
+//Get a channel
+$teamID = 'team_id_of_the_channels_to_return';
+$result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
+```
+
+### Post data model
+```php
+//Create a post
+$teamId = 'team_id_to_add_the_channel_to';
+$channelId = 'team_id_to_add_the_channel_to';
 $requestOptions = [
     'name'         => 'new_channel',
     'display_name' => 'New Channel',
