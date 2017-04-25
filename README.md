@@ -109,29 +109,13 @@ $postId = 'post_id_of_the_post_to_return';
 $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 ```
 
-### File data model
-```php
-//Upload a file
-$teamId = 'the_id_of_one_of_the_current_users_teams';
-$requestOptions = [
-    'files'         => 'a file to be uploaded',
-    'channel_id'    => 'the id of the channel that this file will be uploaded to'
-];
-$result = $driver->getFileModel()->uploadFile($teamId, $requestOptions);
-
-
-//Get a file
-$fileId = 'the_id_of_the_file_to_get';
-$result = $driver->getFileModel()->getFile($fileId);
-```
-
 ## ToDo
 [x] Add Team data model  
 [x] Add Channel data model  
 [x] Add Post data model  
 [x] Add File data model     
 [ ] Add Admin data model (in development)  
-[ ] Add Preference data model
+[x] Add Preference data model
 
 ## Contact
 - luca@gnello.com

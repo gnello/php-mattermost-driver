@@ -14,6 +14,7 @@ namespace Gnello\Mattermost;
 use Gnello\Mattermost\Models\ChannelModel;
 use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\PostModel;
+use Gnello\Mattermost\Models\PreferenceModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Pimple\Container;
@@ -148,5 +149,17 @@ class Driver
         }
 
         return $this->models['file'];
+    }
+
+    /**
+     * @return PreferenceModel
+     */
+    public function getPreferenceModel()
+    {
+        if (!isset($this->models['preference'])) {
+            $this->models['preference'] = new PreferenceModel($this->container['client']);
+        }
+
+        return $this->models['preference'];
     }
 }
