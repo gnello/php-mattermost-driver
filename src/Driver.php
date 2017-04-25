@@ -12,6 +12,7 @@
 namespace Gnello\Mattermost;
 
 use Gnello\Mattermost\Models\ChannelModel;
+use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Pimple\Container;
@@ -64,7 +65,7 @@ class Driver
     }
 
     /**
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function authenticate()
     {
@@ -121,5 +122,18 @@ class Driver
         }
 
         return $this->models['channel'];
+    }
+
+    /**
+     * @param $teamId
+     * @return PostModel
+     */
+    public function getPostModel($teamId)
+    {
+        if (!isset($this->models['post'])) {
+            $this->models['post'] = new PostModel($this->container['post'], $teamId);
+        }
+
+        return $this->models['post'];
     }
 }

@@ -1,7 +1,6 @@
-# php-mattermost-driver (v3.7.0)
+# php-mattermost-driver (v3)
 
 Completed Php Driver to interact with the [Mattermost Web Service API][4].  
-Version of the Mattermost server required: 3.7.0
 
 Please read [the api documentation][1] for further information on using this application.
 
@@ -78,7 +77,7 @@ $result = $driver->getTeamModel()->getTeamByName('new_team');
 ### Channel data model
 ```php
 //Create a channel
-$teamID = 'team_id_to_add_the_channel_to';
+$teamId = 'team_id_to_add_the_channel_to';
 $requestOptions = [
     'name'         => 'new_channel',
     'display_name' => 'New Channel',
@@ -88,15 +87,33 @@ $result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
 
 
 //Get a channel
-$teamID = 'team_id_of_the_channels_to_return';
+$teamId = 'team_id_of_the_channels_to_return';
 $result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
+```
+
+### Post data model
+```php
+//Create a post
+$teamId = 'team_id_to_create_the_post_to';
+$channelId = 'channel_id_to_create_the_post_to';
+$requestOptions = [
+    'message'   => 'hello world!'
+];
+$result = $driver->getPostModel($teamId)->createPost($channelId, $requestOptions);
+
+
+//Get a post
+$teamID = 'team_id_of_the_post_to_return';
+$channelId = 'channel_id_of_the_post_to_return';
+$postId = 'post_id_of_the_post_to_return';
+$result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 ```
 
 ## ToDo
 [x] Add Team data model  
 [x] Add Channel data model  
-[ ] Add Post data model (in development)  
-[ ] Add File data model  
+[x] Add Post data model  
+[ ] Add File data model (in development)    
 [ ] Add Admin data model  
 [ ] Add Preference data model
 
