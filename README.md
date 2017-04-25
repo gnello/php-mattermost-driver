@@ -18,6 +18,8 @@ Read more about how to install and use Composer on your local machine [here][3].
 ### Authentication
 
 ```php
+ use \Gnello\Mattermost\Driver;
+
  $container = new \Pimple\Container([
      'driver'    => [
          'url'       => 'your_chat_url',
