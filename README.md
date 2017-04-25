@@ -112,8 +112,8 @@ $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 ## ToDo
 [x] Add Team data model  
 [x] Add Channel data model  
-[x] Add Post data model (in development)  
-[ ] Add File data model  
+[x] Add Post data model  
+[ ] Add File data model (in development)    
 [ ] Add Admin data model  
 [ ] Add Preference data model
 
