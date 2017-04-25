@@ -12,6 +12,7 @@
 namespace Gnello\Mattermost;
 
 use Gnello\Mattermost\Models\ChannelModel;
+use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
@@ -131,9 +132,21 @@ class Driver
     public function getPostModel($teamId)
     {
         if (!isset($this->models['post'])) {
-            $this->models['post'] = new PostModel($this->container['post'], $teamId);
+            $this->models['post'] = new PostModel($this->container['client'], $teamId);
         }
 
         return $this->models['post'];
+    }
+
+    /**
+     * @return FileModel
+     */
+    public function getFileModel()
+    {
+        if (!isset($this->models['file'])) {
+            $this->models['file'] = new FileModel($this->container['client']);
+        }
+
+        return $this->models['file'];
     }
 }
