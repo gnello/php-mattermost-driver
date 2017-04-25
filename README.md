@@ -111,14 +111,6 @@ $postId = 'post_id_of_the_post_to_return';
 $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 ```
 
-## ToDo
-[x] Add Team data model  
-[x] Add Channel data model  
-[x] Add Post data model  
-[x] Add File data model     
-[ ] Add Admin data model (in development)  
-[x] Add Preference data model
-
 ## Contact
 - luca@gnello.com
 
