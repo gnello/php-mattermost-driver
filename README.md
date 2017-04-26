@@ -1,5 +1,7 @@
 # php-mattermost-driver (v3)
 
+[![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6]
+
 Completed Php Driver to interact with the [Mattermost Web Service API][4].  
 
 Please read [the api documentation][1] for further information on using this application.
@@ -118,3 +120,7 @@ $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 [2]: http://www.php-fig.org/psr/psr-7/
 [3]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
 [4]: https://about.mattermost.com/
+[5]: https://scrutinizer-ci.com/g/gnello/php-mattermost-driver/badges/quality-score.png?b=master
+[6]: https://scrutinizer-ci.com/g/gnello/php-mattermost-driver/?branch=master
+[7]: https://poser.pugx.org/gnello/php-mattermost-driver/v/stable
+[8]: https://packagist.org/packages/gnello/php-mattermost-driver
