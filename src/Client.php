@@ -79,11 +79,12 @@ class Client
 
     /**
      * @param $options
+     * @param $type
      * @return array
      */
-    private function makeOptions($options)
+    private function makeOptions($options, $type)
     {
-        return array_merge($this->headers, ['json' => $options]);
+        return array_merge($this->headers, [$type => $options]);
     }
 
     /**
@@ -92,10 +93,10 @@ class Client
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    private function dispatch($method, $uri, array $options = [])
+    private function dispatch($method, $uri, $type, array $options = [])
     {
         try {
-            $response = $this->client->{$method}($this->makeUri($uri), $this->makeOptions($options));
+            $response = $this->client->{$method}($this->makeUri($uri), $this->makeOptions($options, $type));
         } catch (ClientException $e) {
             $response = $e->getResponse();
         } catch (ServerException $e) {
@@ -110,9 +111,9 @@ class Client
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get($uri, array $options = [])
+    public function get($uri, array $options = [], $type = 'query')
     {
-        return $this->dispatch('get', $uri, $options);
+        return $this->dispatch('get', $uri, $type, $options);
     }
 
     /**
@@ -120,9 +121,9 @@ class Client
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function post($uri, $options = [])
+    public function post($uri, $options = [], $type = 'json')
     {
-        return $this->dispatch('post', $uri, $options);
+        return $this->dispatch('post', $uri, $type, $options);
     }
 
     /**
@@ -130,9 +131,9 @@ class Client
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function put($uri, $options = [])
+    public function put($uri, $options = [], $type = 'json')
     {
-        return $this->dispatch('put', $uri, $options);
+        return $this->dispatch('put', $uri, $type, $options);
     }
 
     /**
@@ -140,8 +141,8 @@ class Client
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function delete($uri, $options = [])
+    public function delete($uri, $options = [], $type = 'json')
     {
-        return $this->dispatch('delete', $uri, $options);
+        return $this->dispatch('delete', $uri, $type, $options);
     }
 }
