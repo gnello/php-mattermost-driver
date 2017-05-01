@@ -94,80 +94,80 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUser($user_id)
+    public function getUser($userId)
     {
-        return $this->client->get(self::$endpoint . '/' . $user_id);
+        return $this->client->get(self::$endpoint . '/' . $userId);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUser($user_id, array $requestOptions)
+    public function updateUser($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id, $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId, $requestOptions);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function deactivateUserAccount($user_id)
+    public function deactivateUserAccount($userId)
     {
-        return $this->client->delete(self::$endpoint . '/' . $user_id);
+        return $this->client->delete(self::$endpoint . '/' . $userId);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function patchUser($user_id, array $requestOptions)
+    public function patchUser($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id . '/patch', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId . '/patch', $requestOptions);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserRoles($user_id, array $requestOptions)
+    public function updateUserRoles($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id . '/roles', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId . '/roles', $requestOptions);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserActive($user_id, array $requestOptions)
+    public function updateUserActive($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id . '/active', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId . '/active', $requestOptions);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserProfileImage($user_id)
+    public function getUserProfileImage($userId)
     {
-        return $this->client->get(self::$endpoint . '/' . $user_id . '/image');
+        return $this->client->get(self::$endpoint . '/' . $userId . '/image');
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function setUserProfileImage($user_id, array $requestOptions)
+    public function setUserProfileImage($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $user_id . '/image', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, 'multipart');
     }
 
     /**
@@ -189,23 +189,23 @@ class UserModel extends AbstractModel
     }
     
     /**
-     * @param $user_id
+     * @param $userId
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserMfa($user_id, array $requestOptions)
+    public function updateUserMfa($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id . '/mfa', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId . '/mfa', $requestOptions);
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function generateMfaSecret($user_id, array $requestOptions)
+    public function generateMfaSecret($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $user_id . '/mfa/generate', $requestOptions);
+        return $this->client->post(self::$endpoint . '/' . $userId . '/mfa/generate', $requestOptions);
     }
 
     /**
@@ -218,13 +218,13 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserPassword($user_id, array $requestOptions)
+    public function updateUserPassword($userId, array $requestOptions)
     {
-        return $this->client->put(self::$endpoint . '/' . $user_id . '/password', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $userId . '/password', $requestOptions);
     }
 
     /**
@@ -246,22 +246,22 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserSessions($user_id)
+    public function getUserSessions($userId)
     {
-        return $this->client->get(self::$endpoint . '/' . $user_id . '/sessions');
+        return $this->client->get(self::$endpoint . '/' . $userId . '/sessions');
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function revokeUserSession($user_id, array $requestOptions)
+    public function revokeUserSession($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $user_id . '/sessions/revoke', $requestOptions);
+        return $this->client->post(self::$endpoint . '/' . $userId . '/sessions/revoke', $requestOptions);
     }
 
     /**
@@ -274,12 +274,12 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $user_id
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserAudits($user_id)
+    public function getUserAudits($userId)
     {
-        return $this->client->get(self::$endpoint . '/' . $user_id . '/audits');
+        return $this->client->get(self::$endpoint . '/' . $userId . '/audits');
     }
 
     /**
