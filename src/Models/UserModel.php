@@ -21,24 +21,7 @@ class UserModel extends AbstractModel
     /**
      * @var string
      */
-    private static $endpoint = '/users';
-
-    /**
-     * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function createUser(array $requestOptions)
-    {
-        return $this->client->post(self::$endpoint . '/create', $requestOptions);
-    }
-
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getAuthenticatedUser()
-    {
-        return $this->client->get(self::$endpoint . '/me');
-    }
+    public static $endpoint = '/users';
 
     /**
      * @param array $requestOptions
@@ -58,26 +41,38 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $offset
-     * @param $limit
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUsersList($offset, $limit)
+    public function getAuthenticatedUser()
     {
-        $uri = self::$endpoint . '/' . $offset . '/' . $limit;
-        return $this->client->get($uri);
+        return $this->client->get(self::$endpoint . '/me');
     }
 
     /**
-     * @param $team_id
-     * @param $offset
-     * @param $limit
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUsersListOfTeam($team_id, $offset, $limit)
+    public function createUser(array $requestOptions)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
-        return $this->client->get($uri);
+        return $this->client->post(self::$endpoint, $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUsers(array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint, $requestOptions);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUsersByIds(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/ids', $requestOptions);
     }
 
     /**
@@ -90,12 +85,155 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function autocompleteUsers(array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/autocomplete', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUser($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId);
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUser($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId, $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function deactivateUserAccount($userId)
+    {
+        return $this->client->delete(self::$endpoint . '/' . $userId);
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function patchUser($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/patch', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserRoles($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/roles', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserActive($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/active', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUserProfileImage($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/image');
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function setUserProfileImage($userId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, 'multipart');
+    }
+
+    /**
      * @param $username
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getUserByUsername($username)
     {
-        return $this->client->get(self::$endpoint . '/name/' . $username);
+        return $this->client->get(self::$endpoint . '/username/' . $username);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function resetPassword(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/password/reset', $requestOptions);
+    }
+    
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserMfa($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/mfa', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function generateMfaSecret($userId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/mfa/generate', $requestOptions);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function checkMfa(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/mfa', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserPassword($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/password', $requestOptions);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function sendPasswordResetEmail(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/password/reset/send', $requestOptions);
     }
 
     /**
@@ -108,132 +246,66 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUserSessions($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/sessions');
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function revokeUserSession($userId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/sessions/revoke', $requestOptions);
+    }
+
+    /**
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUsersListByIds(array $requestOptions)
+    public function attachMobileDevice(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/ids', $requestOptions);
+        return $this->client->put(self::$endpoint . '/sessions/device', $requestOptions);
     }
 
     /**
-     * @param $team_id
-     * @param $channel_id
-     * @param $offset
-     * @param $limit
+     * @param $userId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getUserInChannel($team_id, $channel_id, $offset, $limit)
+    public function getUserAudits($userId)
     {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/' . $offset . '/' . $limit;
-        return $this->client->get($uri);
-    }
-
-    /**
-     * @param $team_id
-     * @param $channel_id
-     * @param $offset
-     * @param $limit
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getUserNotInChannel($team_id, $channel_id, $offset, $limit)
-    {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/not_in_channel/' . $offset . '/' . $limit;
-        return $this->client->post($uri);
+        return $this->client->get(self::$endpoint . '/' . $userId . '/audits');
     }
 
     /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUser(array $requestOptions)
+    public function verifyUserEmail(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/update', $requestOptions);
+        return $this->client->post(self::$endpoint . '/email/verify', $requestOptions);
     }
 
     /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserRoles(array $requestOptions)
+    public function sendVerificationEmail(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/update_roles', $requestOptions);
+        return $this->client->post(self::$endpoint . '/email/verify/send', $requestOptions);
     }
 
     /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateUserActive(array $requestOptions)
+    public function switchLoginMethod(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/update_active', $requestOptions);
-    }
-
-    /**
-     * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function updateUserNotificationProperties(array $requestOptions)
-    {
-        return $this->client->post(self::$endpoint . '/update_notify', $requestOptions);
-    }
-
-    /**
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function updateUserPassword(array $requestOptions)
-    {
-        return $this->client->post(self::$endpoint . '/newpassword', $requestOptions);
-    }
-
-    /**
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function sendPasswordResetEmail(array $requestOptions)
-    {
-        return $this->client->post(self::$endpoint . '/send_password_reset', $requestOptions);
-    }
-
-    /**
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function resetUserPassword(array $requestOptions)
-    {
-        return $this->client->post(self::$endpoint . '/reset_password', $requestOptions);
-    }
-
-    /**
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function autocompleteUsers(array $requestOptions)
-    {
-        return $this->client->get(self::$endpoint . '/autocomplete', $requestOptions);
-    }
-
-    /**
-     * @param $team_id
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function autocompleteUsersOfTeam($team_id, array $requestOptions)
-    {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/' . self::$endpoint . '/autocomplete';
-        return $this->client->get($uri, $requestOptions);
-    }
-
-    /**
-     * @param $team_id
-     * @param $channel_id
-     * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function autocompleteUsersOfChannel($team_id, $channel_id, array $requestOptions)
-    {
-        $uri = TeamModel::$endpoint . '/' . $team_id . '/channels/' . $channel_id . '/' . self::$endpoint . '/autocomplete';
-        return $this->client->get($uri, $requestOptions);
+        return $this->client->post(self::$endpoint . '/login/switch', $requestOptions);
     }
 }
