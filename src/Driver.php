@@ -114,13 +114,12 @@ class Driver
     }
 
     /**
-     * @param $teamId
      * @return ChannelModel
      */
-    public function getChannelModel($teamId)
+    public function getChannelModel()
     {
         if (!isset($this->models['channel'])) {
-            $this->models['channel'] = new ChannelModel($this->container['client'], $teamId);
+            $this->models['channel'] = new ChannelModel($this->container['client']);
         }
 
         return $this->models['channel'];
