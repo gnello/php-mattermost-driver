@@ -90,8 +90,9 @@ class Client
     /**
      * @param       $method
      * @param       $uri
+     * @param       $type
      * @param array $options
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return null|\Psr\Http\Message\ResponseInterface
      */
     private function dispatch($method, $uri, $type, array $options = [])
     {
@@ -107,8 +108,9 @@ class Client
     }
 
     /**
-     * @param       $uri
-     * @param array $options
+     * @param        $uri
+     * @param array  $options
+     * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function get($uri, array $options = [], $type = 'query')
@@ -117,8 +119,9 @@ class Client
     }
 
     /**
-     * @param       $uri
-     * @param array $options
+     * @param        $uri
+     * @param array  $options
+     * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function post($uri, $options = [], $type = 'json')
@@ -127,8 +130,9 @@ class Client
     }
 
     /**
-     * @param       $uri
-     * @param array $options
+     * @param        $uri
+     * @param array  $options
+     * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function put($uri, $options = [], $type = 'json')
@@ -137,8 +141,9 @@ class Client
     }
 
     /**
-     * @param       $uri
-     * @param array $options
+     * @param        $uri
+     * @param array  $options
+     * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function delete($uri, $options = [], $type = 'json')
