@@ -33,7 +33,7 @@ class Driver
      */
     private $defaultOptions = [
         'scheme'    => 'https',
-        'basePath'  => '/api/v3',
+        'basePath'  => '/api/v4',
         'url'       => 'localhost',
         'login_id'  => null,
         'password'  => null,
@@ -79,7 +79,7 @@ class Driver
 
         /** @var Client $client */
         $client = $this->container['client'];
-        $response = $client->post('/users/login', $options);
+        $response = $client->post(UserModel::$endpoint . '/login', $options);
 
         if ($response->getStatusCode() == 200) {
             $token = $response->getHeader('Token')[0];
