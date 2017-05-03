@@ -72,18 +72,16 @@ class Driver
     public function authenticate()
     {
         $driverOptions = $this->container['driver'];
-        $options = [
+        $requestOptions = [
             'login_id' => $driverOptions['login_id'],
             'password' => $driverOptions['password']
         ];
 
-        /** @var Client $client */
-        $client = $this->container['client'];
-        $response = $client->post(UserModel::$endpoint . '/login', $options);
+        $response = $this->getUserModel()->loginToUserAccount($requestOptions);
 
         if ($response->getStatusCode() == 200) {
             $token = $response->getHeader('Token')[0];
-            $client->setToken($token);
+            $this->container['client']->setToken($token);
         }
 
         return $response;
