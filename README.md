@@ -100,6 +100,13 @@ $postId = 'post_id_of_the_post_to_return';
 $result = $driver->getPostModel()->getPost($postId);
 ```
 
+### Preference data model
+```php
+//Get a list of the user's preferences
+$userId = 'user_id';
+$result = $driver->getPreferenceModel($userId)->getUserPreference();
+```
+
 ## Contact
 - luca@gnello.com
 

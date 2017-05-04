@@ -124,13 +124,12 @@ class Driver
     }
 
     /**
-     * @param $teamId
      * @return PostModel
      */
-    public function getPostModel($teamId)
+    public function getPostModel()
     {
         if (!isset($this->models['post'])) {
-            $this->models['post'] = new PostModel($this->container['client'], $teamId);
+            $this->models['post'] = new PostModel($this->container['client']);
         }
 
         return $this->models['post'];
@@ -149,12 +148,13 @@ class Driver
     }
 
     /**
+     * @param $userId
      * @return PreferenceModel
      */
-    public function getPreferenceModel()
+    public function getPreferenceModel($userId)
     {
         if (!isset($this->models['preference'])) {
-            $this->models['preference'] = new PreferenceModel($this->container['client']);
+            $this->models['preference'] = new PreferenceModel($this->container['client'], $userId);
         }
 
         return $this->models['preference'];

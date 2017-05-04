@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class PreferenceModel
  *
@@ -28,12 +30,37 @@ class PreferenceModel extends AbstractModel
     public static $endpoint = '/preferences';
 
     /**
+     * @var string
+     */
+    private $userId;
+
+    /**
+     * PreferenceModel constructor.
+     *
+     * @param Client $client
+     * @param        $userId
+     */
+    public function __construct(Client $client, $userId)
+    {
+        parent::__construct($client);
+        $this->userId = $userId;
+    }
+
+    /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUserPreference()
+    {
+        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences');
+    }
+
+    /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function saveUserPreferences(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/save', $requestOptions);
+        return $this->client->post(UserModel::$endpoint . '/' . $this->userId . '/preferences', $requestOptions);
     }
 
     /**
@@ -42,7 +69,7 @@ class PreferenceModel extends AbstractModel
      */
     public function deleteUserPreferences(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/delete', $requestOptions);
+        return $this->client->post(UserModel::$endpoint . '/' . $this->userId . '/preferences/delete', $requestOptions);
     }
 
     /**
@@ -51,17 +78,17 @@ class PreferenceModel extends AbstractModel
      */
     public function listUserPreferences($category)
     {
-        return $this->client->get(self::$endpoint . '/' . $category);
+        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences/' . $category);
     }
 
     /**
      * @param $category
-     * @param $name
+     * @param $preferenceName
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getSpecificUserPreference($category, $name)
+    public function getSpecificUserPreference($category, $preferenceName)
     {
-        return $this->client->get(self::$endpoint . '/' . $category . '/' . $name);
+        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences/' . $category . '/name/' . $preferenceName);
     }
 
 }
