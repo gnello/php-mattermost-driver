@@ -85,6 +85,21 @@ $result = $driver->getChannelModel()->createChannel($requestOptions);
 $result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_to_return', 'new_channel');
 ```
 
+### Post data model
+```php
+//Create a post
+$requestOptions = [
+    'channel_id'    => 'channel_id'
+    'message'       => 'hello world!'
+];
+$result = $driver->getPostModel()->createPost($requestOptions);
+
+
+//Get a post
+$postId = 'post_id_of_the_post_to_return';
+$result = $driver->getPostModel()->getPost($postId);
+```
+
 ## Contact
 - luca@gnello.com
 
