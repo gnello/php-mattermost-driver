@@ -27,7 +27,7 @@ class WebhookModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function createIncomingWebhook($requestOptions)
+    public function createIncomingWebhook(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/incoming', $requestOptions);
     }
@@ -36,7 +36,7 @@ class WebhookModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listIncomingWebhooks($requestOptions)
+    public function listIncomingWebhooks(array $requestOptions)
     {
         return $this->client->get(self::$endpoint . '/incoming', $requestOptions);
     }
@@ -73,7 +73,7 @@ class WebhookModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listOutgoingWebhooks($requestOptions)
+    public function listOutgoingWebhooks(array $requestOptions)
     {
         return $this->client->get(self::$endpoint . '/outgoing', $requestOptions);
     }
