@@ -22,14 +22,6 @@ class SystemModel extends AbstractModel
      * @var string
      */
     private static $endpoint = '/system';
-    private static $endpointDatabase = '/database';
-    private static $endpointEmail = '/email';
-    private static $endpointConfig = '/config';
-    private static $endpointLicense = '/license';
-    private static $endpointAudits = '/audits';
-    private static $endpointCaches = '/caches';
-    private static $endpointLogs = '/logs';
-    private static $endpointWebRtc = '/webrtc';
 
     /**
      * @return \Psr\Http\Message\ResponseInterface
@@ -44,7 +36,8 @@ class SystemModel extends AbstractModel
      */
     public function recycleDatabaseConnections()
     {
-        return $this->client->post(self::$endpointDatabase . '/recycle');
+        $customEndpoint = '/database';
+        return $this->client->post($customEndpoint . '/recycle');
     }
 
     /**
@@ -52,7 +45,8 @@ class SystemModel extends AbstractModel
      */
     public function sendTestEmail()
     {
-        return $this->client->post(self::$endpointEmail . '/test');
+        $customEndpoint = '/email';
+        return $this->client->post($customEndpoint . '/test');
     }
 
     /**
@@ -60,7 +54,8 @@ class SystemModel extends AbstractModel
      */
     public function getConfiguration()
     {
-        return $this->client->get(self::$endpointConfig);
+        $customEndpoint = '/config';
+        return $this->client->get($customEndpoint);
     }
 
     /**
@@ -68,7 +63,8 @@ class SystemModel extends AbstractModel
      */
     public function updateConfiguration()
     {
-        return $this->client->put(self::$endpointConfig);
+        $customEndpoint = '/config';
+        return $this->client->put($customEndpoint);
     }
 
     /**
@@ -76,7 +72,8 @@ class SystemModel extends AbstractModel
      */
     public function reloadConfiguration()
     {
-        return $this->client->post(self::$endpointConfig . '/reload');
+        $customEndpoint = '/config';
+        return $this->client->post($customEndpoint . '/reload');
     }
 
     /**
@@ -85,7 +82,8 @@ class SystemModel extends AbstractModel
      */
     public function getClientConfiguration(array $requestOptions)
     {
-        return $this->client->get(self::$endpointConfig . '/client', $requestOptions);
+        $customEndpoint = '/config';
+        return $this->client->get($customEndpoint . '/client', $requestOptions);
     }
 
     /**
@@ -94,7 +92,8 @@ class SystemModel extends AbstractModel
      */
     public function getClientLicense(array $requestOptions)
     {
-        return $this->client->get(self::$endpointLicense . '/client', $requestOptions);
+        $customEndpoint = '/license';
+        return $this->client->get($customEndpoint . '/client', $requestOptions);
     }
 
     /**
@@ -103,7 +102,8 @@ class SystemModel extends AbstractModel
      */
     public function getAudits(array $requestOptions)
     {
-        return $this->client->get(self::$endpointAudits, $requestOptions);
+        $customEndpoint = '/audits';
+        return $this->client->get($customEndpoint, $requestOptions);
     }
 
     /**
@@ -111,7 +111,8 @@ class SystemModel extends AbstractModel
      */
     public function invalidateAllCaches()
     {
-        return $this->client->post(self::$endpointCaches . '/invalidate');
+        $customEndpoint = '/caches';
+        return $this->client->post($customEndpoint . '/invalidate');
     }
 
     /**
@@ -120,7 +121,8 @@ class SystemModel extends AbstractModel
      */
     public function getLogs(array $requestOptions)
     {
-        return $this->client->get(self::$endpointLogs, $requestOptions);
+        $customEndpoint = '/logs';
+        return $this->client->get($customEndpoint, $requestOptions);
     }
 
     /**
@@ -129,7 +131,8 @@ class SystemModel extends AbstractModel
      */
     public function addLogMessage(array $requestOptions)
     {
-        return $this->client->post(self::$endpointLogs, $requestOptions);
+        $customEndpoint = '/logs';
+        return $this->client->post($customEndpoint, $requestOptions);
     }
 
     /**
@@ -137,6 +140,7 @@ class SystemModel extends AbstractModel
      */
     public function getWebRtcToken()
     {
-        return $this->client->get(self::$endpointWebRtc . '/token');
+        $customEndpoint = '/webrtc';
+        return $this->client->get($customEndpoint . '/token');
     }
 }
