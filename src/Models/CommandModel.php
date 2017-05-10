@@ -12,11 +12,11 @@
 namespace Gnello\Mattermost\Models;
 
 /**
- * Class CommandsModel
+ * Class CommandModel
  *
  * @package Gnello\MattermostRestApi\Models
  */
-class CommandsModel extends AbstractModel
+class CommandModel extends AbstractModel
 {
     /**
      * @var string
@@ -27,7 +27,7 @@ class CommandsModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function createCommand($requestOptions)
+    public function createCommand(array $requestOptions)
     {
         return $this->client->post(self::$endpoint, $requestOptions);
     }
@@ -36,7 +36,7 @@ class CommandsModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function listCommandsForTeam($requestOptions)
+    public function listCommandsForTeam(array $requestOptions)
     {
         return $this->client->get(self::$endpoint, $requestOptions);
     }
@@ -55,7 +55,7 @@ class CommandsModel extends AbstractModel
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateCommand($commandId, $requestOptions)
+    public function updateCommand($commandId, array $requestOptions)
     {
         return $this->client->put(self::$endpoint . '/' . $commandId, $requestOptions);
     }
