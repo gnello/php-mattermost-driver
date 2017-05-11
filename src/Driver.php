@@ -11,12 +11,19 @@
 
 namespace Gnello\Mattermost;
 
+use Gnello\Mattermost\Models\BrandModel;
 use Gnello\Mattermost\Models\ChannelModel;
+use Gnello\Mattermost\Models\ClusterModel;
+use Gnello\Mattermost\Models\CommandModel;
+use Gnello\Mattermost\Models\ComplianceModel;
 use Gnello\Mattermost\Models\FileModel;
+use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\PreferenceModel;
+use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
+use Gnello\Mattermost\Models\WebhookModel;
 use Pimple\Container;
 
 /**
@@ -158,5 +165,89 @@ class Driver
         }
 
         return $this->models['preference'];
+    }
+
+    /**
+     * @return WebhookModel
+     */
+    public function getWebhookModel()
+    {
+        if (!isset($this->models['webhook'])) {
+            $this->models['webhook'] = new WebhookModel($this->container['client']);
+        }
+
+        return $this->models['webhook'];
+    }
+
+    /**
+     * @return SystemModel
+     */
+    public function getSystemModel()
+    {
+        if (!isset($this->models['system'])) {
+            $this->models['system'] = new SystemModel($this->container['client']);
+        }
+
+        return $this->models['system'];
+    }
+
+    /**
+     * @return ComplianceModel
+     */
+    public function getComplianceModel()
+    {
+        if (!isset($this->models['compliance'])) {
+            $this->models['compliance'] = new ComplianceModel($this->container['client']);
+        }
+
+        return $this->models['compliance'];
+    }
+
+    /**
+     * @return CommandModel
+     */
+    public function getCommandModel()
+    {
+        if (!isset($this->models['command'])) {
+            $this->models['command'] = new CommandModel($this->container['client']);
+        }
+
+        return $this->models['command'];
+    }
+
+    /**
+     * @return ClusterModel
+     */
+    public function getClusterModel()
+    {
+        if (!isset($this->models['cluster'])) {
+            $this->models['cluster'] = new ClusterModel($this->container['client']);
+        }
+
+        return $this->models['cluster'];
+    }
+
+    /**
+     * @return BrandModel
+     */
+    public function getBrandModel()
+    {
+        if (!isset($this->models['brand'])) {
+            $this->models['brand'] = new BrandModel($this->container['client']);
+        }
+
+        return $this->models['brand'];
+    }
+
+    /**
+     * @return LDAPModel
+     */
+    public function getLDAPModel()
+    {
+        if (!isset($this->models['ldap'])) {
+            $this->models['ldap'] = new LDAPModel($this->container['client']);
+        }
+
+        return $this->models['ldap'];
     }
 }
