@@ -26,7 +26,7 @@ class BrandModel extends AbstractModel
     /**
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getBrandImage(array $requestOptions)
+    public function getBrandImage()
     {
         return $this->client->get(self::$endpoint . '/image');
     }
