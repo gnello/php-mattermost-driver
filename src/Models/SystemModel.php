@@ -59,12 +59,13 @@ class SystemModel extends AbstractModel
     }
 
     /**
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function updateConfiguration()
+    public function updateConfiguration(array $requestOptions)
     {
         $customEndpoint = '/config';
-        return $this->client->put($customEndpoint);
+        return $this->client->put($customEndpoint, $requestOptions);
     }
 
     /**
