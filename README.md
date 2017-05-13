@@ -1,4 +1,4 @@
-# php-mattermost-driver (v3)
+# php-mattermost-driver (v4)
 
 [![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6]
 
@@ -15,6 +15,13 @@ composer require gnello/php-mattermost-driver
 ```
 
 Read more about how to install and use Composer on your local machine [here][3].
+
+#### V3
+If you want to install the [V3 Driver][9] instead of the V4 one you should do:
+
+```
+composer require gnello/php-mattermost-driver:1.*
+```
 
 ## Usage
 ### Authentication
@@ -63,54 +70,41 @@ $result = $driver->getUserModel()->createUser($requestOptions);
 $result = $driver->getUserModel()->getUserByUsername('username');
 ```
 
-### Team data model
-```php
-//Add a new team
-$requestOptions = [
-    'name'         => 'new_team',
-    'display_name' => 'New Team',
-    'type'         => 'O',
-];
-$result = $driver->getTeamModel()->createTeam($requestOptions);
-
-
-//Get a team
-$result = $driver->getTeamModel()->getTeamByName('new_team');
-```
-
 ### Channel data model
 ```php
 //Create a channel
-$teamId = 'team_id_to_add_the_channel_to';
 $requestOptions = [
     'name'         => 'new_channel',
     'display_name' => 'New Channel',
     'type'         => 'O',
 ];
-$result = $driver->getChannelModel($teamId)->createChannel($requestOptions);
+$result = $driver->getChannelModel()->createChannel($requestOptions);
 
 
 //Get a channel
-$teamId = 'team_id_of_the_channels_to_return';
-$result = $driver->getChannelModel($teamId)->getChannelByName('new_channel');
+$result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_to_return', 'new_channel');
 ```
 
 ### Post data model
 ```php
 //Create a post
-$teamId = 'team_id_to_create_the_post_to';
-$channelId = 'channel_id_to_create_the_post_to';
 $requestOptions = [
-    'message'   => 'hello world!'
+    'channel_id'    => 'channel_id'
+    'message'       => 'hello world!'
 ];
-$result = $driver->getPostModel($teamId)->createPost($channelId, $requestOptions);
+$result = $driver->getPostModel()->createPost($requestOptions);
 
 
 //Get a post
-$teamId = 'team_id_of_the_post_to_return';
-$channelId = 'channel_id_of_the_post_to_return';
 $postId = 'post_id_of_the_post_to_return';
-$result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
+$result = $driver->getPostModel()->getPost($postId);
+```
+
+### Preference data model
+```php
+//Get a list of the user's preferences
+$userId = 'user_id';
+$result = $driver->getPreferenceModel($userId)->getUserPreference();
 ```
 
 ## Contact
@@ -124,3 +118,4 @@ $result = $driver->getPostModel($teamId)->getPost($channelId, $postId);
 [6]: https://scrutinizer-ci.com/g/gnello/php-mattermost-driver/?branch=master
 [7]: https://poser.pugx.org/gnello/php-mattermost-driver/v/stable
 [8]: https://packagist.org/packages/gnello/php-mattermost-driver
+[9]: https://github.com/gnello/php-mattermost-driver/tree/v1.3.0

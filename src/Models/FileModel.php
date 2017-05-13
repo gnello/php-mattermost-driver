@@ -28,13 +28,12 @@ class FileModel extends AbstractModel
     public static $endpoint = '/files';
 
     /**
-     * @param       $teamId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function uploadFile($teamId, array $requestOptions)
+    public function uploadFile(array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/upload', $requestOptions);
+        return $this->client->post(self::$endpoint, $requestOptions);
     }
 
     /**
@@ -43,34 +42,25 @@ class FileModel extends AbstractModel
      */
     public function getFile($fileId)
     {
-        return $this->client->get(self::$endpoint . '/' . $fileId . '/get');
+        return $this->client->get(self::$endpoint . '/' . $fileId);
     }
 
     /**
      * @param $fileId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getImageThumbnail($fileId)
+    public function getFilesThumbnail($fileId)
     {
-        return $this->client->get(self::$endpoint . '/' . $fileId . '/get_thumbnail');
+        return $this->client->get(self::$endpoint . '/' . $fileId . '/thumbnail');
     }
 
     /**
      * @param $fileId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getImagePreview($fileId)
+    public function getFilesPreview($fileId)
     {
-        return $this->client->get(self::$endpoint . '/' . $fileId . '/get_preview');
-    }
-
-    /**
-     * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getMetadataForFile($fileId)
-    {
-        return $this->client->get(self::$endpoint . '/' . $fileId . '/get_info');
+        return $this->client->get(self::$endpoint . '/' . $fileId . '/preview');
     }
 
     /**
@@ -79,7 +69,16 @@ class FileModel extends AbstractModel
      */
     public function getPublicFileLink($fileId)
     {
-        return $this->client->get(self::$endpoint . '/' . $fileId . '/get_public_link');
+        return $this->client->get(self::$endpoint . '/' . $fileId . '/link');
+    }
+
+    /**
+     * @param $fileId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getMetadataForFile($fileId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $fileId . '/info');
     }
 
 }

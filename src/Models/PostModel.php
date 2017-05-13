@@ -15,8 +15,6 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
-
 /**
  * Class PostModel
  *
@@ -30,184 +28,115 @@ class PostModel extends AbstractModel
     public static $endpoint = '/posts';
 
     /**
-     * @var string
-     */
-    private $teamId;
-
-    /**
-     * ChannelModel constructor.
-     *
-     * @param Client $client
-     * @param        $teamId
-     */
-    public function __construct(Client $client, $teamId)
-    {
-        $this->teamId = $teamId;
-        parent::__construct($client);
-    }
-
-    /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function searchForPosts(array $requestOptions)
+    public function createPost(array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . self::$endpoint . '/search', $requestOptions);
+        return $this->client->post(self::$endpoint, $requestOptions);
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getFlaggedPosts($offset, $limit)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/flagged/' . $offset . '/' . $limit);
-    }
-
-    /**
-     * @param       $channelId
-     * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function createPost($channelId, array $requestOptions)
-    {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/create', $requestOptions);
-    }
-
-    /**
-     * @param       $channelId
-     * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function updatePost($channelId, array $requestOptions)
-    {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/update', $requestOptions);
-    }
-
-    /**
-     * @param       $channelId
-     * @param       $postId
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function pinPost($channelId, $postId)
-    {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/pin');
-    }
-
-    /**
-     * @param       $channelId
-     * @param       $postId
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function unpinPost($channelId, $postId)
-    {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/unpin');
-    }
-
-    /**
-     * @param $channelId
-     * @param $offset
-     * @param $limit
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getPostsForChannel($channelId, $offset, $limit)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/page/' . $offset . '/' . $limit);
-    }
-
-    /**
-     * @param $channelId
-     * @param $time
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getPostsSinceTime($channelId, $time)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/since/' . $time);
-    }
-
-    /**
-     * @param $channelId
      * @param $postId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getPost($channelId, $postId)
+    public function getPost($postId)
     {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/get');
+        return $this->client->get(self::$endpoint . '/' . $postId);
     }
 
     /**
-     * @param $channelId
      * @param $postId
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function deletePost($channelId, $postId)
+    public function deletePost($postId)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/delete');
+        return $this->client->delete(self::$endpoint . '/' . $postId);
     }
 
     /**
-     * @param $channelId
-     * @param $postId
-     * @param $offset
-     * @param $limit
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getPostsBeforePost($channelId, $postId, $offset, $limit)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/before/' . $offset . '/' . $limit);
-    }
-
-    /**
-     * @param $channelId
-     * @param $postId
-     * @param $offset
-     * @param $limit
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getPostsAfterPost($channelId, $postId, $offset, $limit)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/after/' . $offset . '/' . $limit);
-    }
-
-    /**
-     * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getOpenGraphMetadataForURL(array $requestOptions)
-    {
-        return $this->client->post('get_opengraph_metadata', $requestOptions);
-    }
-
-    /**
-     * @param $channelId
-     * @param $postId
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function listReactionsToPost($channelId, $postId)
-    {
-        return $this->client->get(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/reactions');
-    }
-
-    /**
-     * @param       $channelId
      * @param       $postId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function reactToPost($channelId, $postId, array $requestOptions)
+    public function updatePost($postId, array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/reactions/save', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $postId, $requestOptions);
     }
 
     /**
-     * @param       $channelId
      * @param       $postId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function removeReactionFromPost($channelId, $postId, array $requestOptions)
+    public function patchPost($postId, array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $this->teamId . '/' . ChannelModel::$endpoint . '/' . $channelId . '/' . self::$endpoint . '/' . $postId . '/reactions/delete', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $postId . '/patch', $requestOptions);
+    }
+
+    /**
+     * @param $postId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getThread($postId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $postId . '/thread');
+    }
+
+    /**
+     * @param       $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getFlaggedPosts($userId, array $requestOptions)
+    {
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/posts/flagged', $requestOptions);
+    }
+
+    /**
+     * @param       $postId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getFileInfoForPost($postId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $postId . '/files/info');
+    }
+
+    /**
+     * @param       $channelId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getPostsForChannel($channelId, array $requestOptions)
+    {
+        return $this->client->get(ChannelModel::$endpoint . '/' . $channelId . '/posts', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function searchForTeamPosts($teamId, array $requestOptions)
+    {
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . '/posts/search', $requestOptions);
+    }
+
+    /**
+     * @param       $postId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function pinPost($postId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $postId . '/pin');
+    }
+
+    /**
+     * @param       $postId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function unpinPost($postId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $postId . '/unpin');
     }
 }
