@@ -18,8 +18,10 @@ use Gnello\Mattermost\Models\CommandModel;
 use Gnello\Mattermost\Models\ComplianceModel;
 use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\LDAPModel;
+use Gnello\Mattermost\Models\OAuthModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\PreferenceModel;
+use Gnello\Mattermost\Models\SAMLModel;
 use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
@@ -249,5 +251,29 @@ class Driver
         }
 
         return $this->models['ldap'];
+    }
+
+    /**
+     * @return OAuthModel
+     */
+    public function getOAuthModel()
+    {
+        if (!isset($this->models['oauth'])) {
+            $this->models['oauth'] = new OAuthModel($this->container['client']);
+        }
+
+        return $this->models['oauth'];
+    }
+
+    /**
+     * @return SAMLModel
+     */
+    public function getSAMLModel()
+    {
+        if (!isset($this->models['saml'])) {
+            $this->models['saml'] = new SAMLModel($this->container['client']);
+        }
+
+        return $this->models['saml'];
     }
 }
