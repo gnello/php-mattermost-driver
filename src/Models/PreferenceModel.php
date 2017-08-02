@@ -60,7 +60,7 @@ class PreferenceModel extends AbstractModel
      */
     public function saveUserPreferences(array $requestOptions)
     {
-        return $this->client->post(UserModel::$endpoint . '/' . $this->userId . '/preferences', $requestOptions);
+        return $this->client->put(UserModel::$endpoint . '/' . $this->userId . '/preferences', $requestOptions);
     }
 
     /**
