@@ -308,4 +308,42 @@ class UserModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/login/switch', $requestOptions);
     }
+
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function createToken($userId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/tokens', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getTokens($userId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/tokens', $requestOptions);
+    }
+
+    /**
+     * @param $tokenId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getToken($tokenId)
+    {
+        return $this->client->get(self::$endpoint . '/tokens/' . $tokenId);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function revokeToken(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/users/tokens/revoke', $requestOptions);
+    }
 }
