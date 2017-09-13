@@ -16,6 +16,8 @@ use Gnello\Mattermost\Models\ChannelModel;
 use Gnello\Mattermost\Models\ClusterModel;
 use Gnello\Mattermost\Models\CommandModel;
 use Gnello\Mattermost\Models\ComplianceModel;
+use Gnello\Mattermost\Models\ElasticsearchModel;
+use Gnello\Mattermost\Models\EmojiModel;
 use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\OAuthModel;
@@ -96,16 +98,21 @@ class Driver
         return $response;
     }
 
+    private function getModel($className)
+    {
+        if (!isset($this->models[$className])) {
+            $this->models[$className] = new $className($this->container['client']);
+        }
+
+        return $this->models[$className];
+    }
+
     /**
      * @return UserModel
      */
     public function getUserModel()
     {
-        if (!isset($this->models['user'])) {
-            $this->models['user'] = new UserModel($this->container['client']);
-        }
-
-        return $this->models['user'];
+        return $this->getModel(UserModel::class);
     }
 
     /**
@@ -113,11 +120,7 @@ class Driver
      */
     public function getTeamModel()
     {
-        if (!isset($this->models['team'])) {
-            $this->models['team'] = new TeamModel($this->container['client']);
-        }
-
-        return $this->models['team'];
+        return $this->getModel(TeamModel::class);
     }
 
     /**
@@ -125,11 +128,7 @@ class Driver
      */
     public function getChannelModel()
     {
-        if (!isset($this->models['channel'])) {
-            $this->models['channel'] = new ChannelModel($this->container['client']);
-        }
-
-        return $this->models['channel'];
+        return $this->getModel(ChannelModel::class);
     }
 
     /**
@@ -137,11 +136,7 @@ class Driver
      */
     public function getPostModel()
     {
-        if (!isset($this->models['post'])) {
-            $this->models['post'] = new PostModel($this->container['client']);
-        }
-
-        return $this->models['post'];
+        return $this->getModel(PostModel::class);
     }
 
     /**
@@ -149,11 +144,7 @@ class Driver
      */
     public function getFileModel()
     {
-        if (!isset($this->models['file'])) {
-            $this->models['file'] = new FileModel($this->container['client']);
-        }
-
-        return $this->models['file'];
+        return $this->getModel(FileModel::class);
     }
 
     /**
@@ -162,11 +153,11 @@ class Driver
      */
     public function getPreferenceModel($userId)
     {
-        if (!isset($this->models['preference'])) {
-            $this->models['preference'] = new PreferenceModel($this->container['client'], $userId);
+        if (!isset($this->models[PreferenceModel::class])) {
+            $this->models[PreferenceModel::class] = new PreferenceModel($this->container['client'], $userId);
         }
 
-        return $this->models['preference'];
+        return $this->models[PreferenceModel::class];
     }
 
     /**
@@ -174,11 +165,7 @@ class Driver
      */
     public function getWebhookModel()
     {
-        if (!isset($this->models['webhook'])) {
-            $this->models['webhook'] = new WebhookModel($this->container['client']);
-        }
-
-        return $this->models['webhook'];
+        return $this->getModel(WebhookModel::class);
     }
 
     /**
@@ -186,11 +173,7 @@ class Driver
      */
     public function getSystemModel()
     {
-        if (!isset($this->models['system'])) {
-            $this->models['system'] = new SystemModel($this->container['client']);
-        }
-
-        return $this->models['system'];
+        return $this->getModel(SystemModel::class);
     }
 
     /**
@@ -198,11 +181,7 @@ class Driver
      */
     public function getComplianceModel()
     {
-        if (!isset($this->models['compliance'])) {
-            $this->models['compliance'] = new ComplianceModel($this->container['client']);
-        }
-
-        return $this->models['compliance'];
+        return $this->getModel(ComplianceModel::class);
     }
 
     /**
@@ -210,11 +189,7 @@ class Driver
      */
     public function getCommandModel()
     {
-        if (!isset($this->models['command'])) {
-            $this->models['command'] = new CommandModel($this->container['client']);
-        }
-
-        return $this->models['command'];
+        return $this->getModel(CommandModel::class);
     }
 
     /**
@@ -222,11 +197,7 @@ class Driver
      */
     public function getClusterModel()
     {
-        if (!isset($this->models['cluster'])) {
-            $this->models['cluster'] = new ClusterModel($this->container['client']);
-        }
-
-        return $this->models['cluster'];
+        return $this->getModel(ClusterModel::class);
     }
 
     /**
@@ -234,11 +205,7 @@ class Driver
      */
     public function getBrandModel()
     {
-        if (!isset($this->models['brand'])) {
-            $this->models['brand'] = new BrandModel($this->container['client']);
-        }
-
-        return $this->models['brand'];
+        return $this->getModel(BrandModel::class);
     }
 
     /**
@@ -246,11 +213,7 @@ class Driver
      */
     public function getLDAPModel()
     {
-        if (!isset($this->models['ldap'])) {
-            $this->models['ldap'] = new LDAPModel($this->container['client']);
-        }
-
-        return $this->models['ldap'];
+        return $this->getModel(LDAPModel::class);
     }
 
     /**
@@ -258,11 +221,7 @@ class Driver
      */
     public function getOAuthModel()
     {
-        if (!isset($this->models['oauth'])) {
-            $this->models['oauth'] = new OAuthModel($this->container['client']);
-        }
-
-        return $this->models['oauth'];
+        return $this->getModel(OAuthModel::class);
     }
 
     /**
@@ -270,10 +229,22 @@ class Driver
      */
     public function getSAMLModel()
     {
-        if (!isset($this->models['saml'])) {
-            $this->models['saml'] = new SAMLModel($this->container['client']);
-        }
+        return $this->getModel(SAMLModel::class);
+    }
 
-        return $this->models['saml'];
+    /**
+     * @return ElasticsearchModel
+     */
+    public function getElasticsearchModel()
+    {
+        return $this->getModel(ElasticsearchModel::class);
+    }
+
+    /**
+     * @return EmojiModel
+     */
+    public function getEmojiModelModel()
+    {
+        return $this->getModel(EmojiModel::class);
     }
 }

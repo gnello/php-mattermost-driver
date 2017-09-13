@@ -139,4 +139,14 @@ class PostModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/' . $postId . '/unpin');
     }
+
+    /**
+     * @param       $postId
+     * @param       $actionId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function performPostAction($postId, $actionId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $postId . '/actions/' . $actionId);
+    }
 }

@@ -77,4 +77,13 @@ class CommandModel extends AbstractModel
     {
         return $this->client->put(self::$endpoint . '/' . $commandId . '/regen_token');
     }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function executeCommand(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/execute', $requestOptions);
+    }
 }

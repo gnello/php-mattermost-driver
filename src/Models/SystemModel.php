@@ -144,4 +144,13 @@ class SystemModel extends AbstractModel
         $customEndpoint = '/webrtc';
         return $this->client->get($customEndpoint . '/token');
     }
+
+    /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getAnalytics()
+    {
+        $customEndpoint = '/analytics';
+        return $this->client->get($customEndpoint . '/old');
+    }
 }
