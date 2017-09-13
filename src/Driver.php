@@ -98,6 +98,10 @@ class Driver
         return $response;
     }
 
+    /**
+     * @param $className
+     * @return mixed
+     */
     private function getModel($className)
     {
         if (!isset($this->models[$className])) {
