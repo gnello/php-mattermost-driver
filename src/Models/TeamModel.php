@@ -145,7 +145,7 @@ class TeamModel extends AbstractModel
      */
     public function addUserFromInvite(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/members/invite', $requestOptions);
+        return $this->client->get(self::$endpoint . '/members/invite', $requestOptions);
     }
 
     /**
