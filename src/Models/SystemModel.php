@@ -98,6 +98,25 @@ class SystemModel extends AbstractModel
     }
 
     /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function removeLicenseFile()
+    {
+        $customEndpoint = '/license';
+        return $this->client->delete($customEndpoint);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function uploadLicenseFile(array $requestOptions)
+    {
+        $customEndpoint = '/license';
+        return $this->client->post($customEndpoint, $requestOptions, 'multipart');
+    }
+
+    /**
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */

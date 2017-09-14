@@ -183,6 +183,15 @@ class UserModel extends AbstractModel
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
+    public function getUsersByUsernames(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/usernames/', $requestOptions);
+    }
+
+    /**
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     public function resetPassword(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/password/reset', $requestOptions);

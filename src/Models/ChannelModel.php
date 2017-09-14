@@ -103,6 +103,15 @@ class ChannelModel extends AbstractModel
     }
 
     /**
+     * @param       $channelId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function restoreChannel($channelId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $channelId . '/restore');
+    }
+
+    /**
      * @param $channelId
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -127,7 +136,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelByName($teamId, $channelName)
     {
-        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/' . $channelName);
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/name/' . $channelName);
     }
 
     /**
@@ -137,7 +146,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelByNameAndTeamName($teamName, $channelName)
     {
-        return $this->client->get(TeamModel::$endpoint . '/name/' . $teamName . '/' . self::$endpoint . '/' . $channelName);
+        return $this->client->get(TeamModel::$endpoint . '/name/' . $teamName . '/' . self::$endpoint . '/name/' . $channelName);
     }
 
     /**

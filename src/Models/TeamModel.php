@@ -140,6 +140,15 @@ class TeamModel extends AbstractModel
     }
 
     /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function addUserFromInvite(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/members/invite', $requestOptions);
+    }
+
+    /**
      * @param $teamId
      * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
@@ -251,12 +260,31 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamId
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getInviteInfoForTeam($teamId)
+    {
+        return $this->client->get(self::$endpoint . '/invite/' . $teamId);
+    }
+
+    /**
+     * @param $teamId
      * @param array $requestOptions
      * @return null|\Psr\Http\Message\ResponseInterface
      */
     public function getPublicChannels($teamId, array $requestOptions)
     {
         return $this->client->get(self::$endpoint . '/' . $teamId . '/channels', $requestOptions);
+    }
+
+    /**
+     * @param $teamId
+     * @param array $requestOptions
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function getDeletedChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/' . $teamId . '/channels/deleted', $requestOptions);
     }
 
     /**
