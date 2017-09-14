@@ -90,7 +90,7 @@ class PostModel extends AbstractModel
      */
     public function getFlaggedPosts($userId, array $requestOptions)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/posts/flagged', $requestOptions);
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . self::$endpoint . '/flagged', $requestOptions);
     }
 
     /**
@@ -109,7 +109,7 @@ class PostModel extends AbstractModel
      */
     public function getPostsForChannel($channelId, array $requestOptions)
     {
-        return $this->client->get(ChannelModel::$endpoint . '/' . $channelId . '/posts', $requestOptions);
+        return $this->client->get(ChannelModel::$endpoint . '/' . $channelId . self::$endpoint, $requestOptions);
     }
 
     /**
@@ -119,7 +119,7 @@ class PostModel extends AbstractModel
      */
     public function searchForTeamPosts($teamId, array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . '/posts/search', $requestOptions);
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search', $requestOptions);
     }
 
     /**
