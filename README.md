@@ -89,7 +89,7 @@ $result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_
 ```php
 //Create a post
 $requestOptions = [
-    'channel_id'    => 'channel_id'
+    'channel_id'    => 'channel_id',
     'message'       => 'hello world!'
 ];
 $result = $driver->getPostModel()->createPost($requestOptions);
