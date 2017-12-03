@@ -16,6 +16,9 @@ composer require gnello/php-mattermost-driver
 
 Read more about how to install and use Composer on your local machine [here][3].
 
+### Laravel
+If you are going to install this library on laravel maybe you prefer to install the [laravel-mattermost-driver][10].
+
 #### V3
 If you want to install the [V3 Driver][9] instead of the V4 one you should do:
 
@@ -119,3 +122,4 @@ $result = $driver->getPreferenceModel($userId)->getUserPreference();
 [7]: https://poser.pugx.org/gnello/php-mattermost-driver/v/stable
 [8]: https://packagist.org/packages/gnello/php-mattermost-driver
 [9]: https://github.com/gnello/php-mattermost-driver/tree/v1.3.0
+[10]: https://github.com/gnello/laravel-mattermost-driver
