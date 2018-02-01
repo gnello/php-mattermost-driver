@@ -353,7 +353,7 @@ class UserModel extends AbstractModel
      */
     public function revokeToken(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/users/tokens/revoke', $requestOptions);
+        return $this->client->post(self::$endpoint . '/tokens/revoke', $requestOptions);
     }
     
     /**
