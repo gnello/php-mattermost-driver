@@ -375,12 +375,4 @@ class UserModel extends AbstractModel
         return $this->client->put(self::$endpoint . '/' . $userId . '/status', $requestOptions);
     }
 
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function getUserStatusesById()
-    {
-        return $this->client->get(self::$endpoint . '/' . '/status/ids');
-    }
-
 }
