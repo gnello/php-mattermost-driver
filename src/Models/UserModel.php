@@ -355,4 +355,24 @@ class UserModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/users/tokens/revoke', $requestOptions);
     }
+    
+    /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getUserStatus($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/status');
+    }
+
+    /**
+     * @param $userId
+     * @param $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserStatus($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/status', $requestOptions);
+    }
+
 }
