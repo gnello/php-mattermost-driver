@@ -151,13 +151,12 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param $channelId
-     * @param $page
-     * @param $perPage
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getChannelMembers($channelId, $page = 0, $perPage = 60)
+    public function getChannelMembers($channelId, array $requestOptions)
     {
-        return $this->client->get(self::$endpoint . '/' . $channelId . '/members' . '?page=' . $page . '&per_page=' . $perPage);
+        return $this->client->get(self::$endpoint . '/' . $channelId . '/members', $requestOptions);
     }
 
     /**
