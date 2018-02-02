@@ -149,4 +149,13 @@ class PostModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/' . $postId . '/actions/' . $actionId);
     }
+
+    /**
+     * @param $postId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getReactions($postId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $postId . '/reactions');
+    }
 }
