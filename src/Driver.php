@@ -247,8 +247,16 @@ class Driver
     /**
      * @return EmojiModel
      */
-    public function getEmojiModelModel()
+    public function getEmojiModel()
     {
         return $this->getModel(EmojiModel::class);
+    }
+
+    /**
+     * @return ReactionModel
+     */
+    public function getReactionModel()
+    {
+        return $this->getModel(ReactionModel::class);
     }
 }
