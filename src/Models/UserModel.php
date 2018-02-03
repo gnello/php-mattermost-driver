@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class UserEntity
  *
@@ -167,7 +169,7 @@ class UserModel extends AbstractModel
      */
     public function setUserProfileImage($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**

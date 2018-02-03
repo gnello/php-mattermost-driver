@@ -27,6 +27,10 @@ use Pimple\Container;
  */
 class Client
 {
+    const TYPE_JSON = 'json';
+    const TYPE_QUERY = 'query';
+    const TYPE_MULTIPART = 'multipart';
+
     /**
      * @var string
      */
@@ -113,7 +117,7 @@ class Client
      * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get($uri, array $options = [], $type = 'query')
+    public function get($uri, array $options = [], $type = self::TYPE_QUERY)
     {
         return $this->dispatch('get', $uri, $type, $options);
     }
@@ -124,7 +128,7 @@ class Client
      * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function post($uri, $options = [], $type = 'json')
+    public function post($uri, $options = [], $type = self::TYPE_JSON)
     {
         return $this->dispatch('post', $uri, $type, $options);
     }
@@ -135,7 +139,7 @@ class Client
      * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function put($uri, $options = [], $type = 'json')
+    public function put($uri, $options = [], $type = self::TYPE_JSON)
     {
         return $this->dispatch('put', $uri, $type, $options);
     }
@@ -146,7 +150,7 @@ class Client
      * @param string $type
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function delete($uri, $options = [], $type = 'json')
+    public function delete($uri, $options = [], $type = self::TYPE_JSON)
     {
         return $this->dispatch('delete', $uri, $type, $options);
     }

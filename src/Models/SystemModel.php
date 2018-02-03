@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class SystemModel
  *
@@ -113,7 +115,7 @@ class SystemModel extends AbstractModel
     public function uploadLicenseFile(array $requestOptions)
     {
         $customEndpoint = '/license';
-        return $this->client->post($customEndpoint, $requestOptions, 'multipart');
+        return $this->client->post($customEndpoint, $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**

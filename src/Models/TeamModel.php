@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class TeamModel
  *
@@ -255,7 +257,7 @@ class TeamModel extends AbstractModel
      */
     public function importTeamFromOtherApplication($teamId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**

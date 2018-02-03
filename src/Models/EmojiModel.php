@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class EmojiModel
  *
@@ -29,7 +31,7 @@ class EmojiModel extends AbstractModel
      */
     public function createCustomEmoji(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint, $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**

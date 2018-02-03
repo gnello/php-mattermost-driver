@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class SAMLModel
  *
@@ -37,7 +39,7 @@ class SAMLModel extends AbstractModel
      */
     public function uploadIDPCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/idp', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/certificate/idp', $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**
@@ -54,7 +56,7 @@ class SAMLModel extends AbstractModel
      */
     public function uploadPublicCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/public', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/certificate/public', $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**
@@ -71,7 +73,7 @@ class SAMLModel extends AbstractModel
      */
     public function uploadPrivateCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/private', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/certificate/private', $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**

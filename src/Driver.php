@@ -23,6 +23,7 @@ use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\OAuthModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\PreferenceModel;
+use Gnello\Mattermost\Models\ReactionModel;
 use Gnello\Mattermost\Models\SAMLModel;
 use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;

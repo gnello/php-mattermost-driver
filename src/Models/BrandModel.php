@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class BrandModel
  *
@@ -37,6 +39,6 @@ class BrandModel extends AbstractModel
      */
     public function uploadBrandImage(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/image', $requestOptions, 'multipart');
+        return $this->client->post(self::$endpoint . '/image', $requestOptions, Client::TYPE_MULTIPART);
     }
 }

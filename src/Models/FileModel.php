@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Gnello\Mattermost\Client;
+
 /**
  * Class FileModel
  *
@@ -33,7 +35,7 @@ class FileModel extends AbstractModel
      */
     public function uploadFile(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions);
+        return $this->client->post(self::$endpoint, $requestOptions, Client::TYPE_MULTIPART);
     }
 
     /**
