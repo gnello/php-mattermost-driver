@@ -16,6 +16,7 @@ use Gnello\Mattermost\Models\ChannelModel;
 use Gnello\Mattermost\Models\ClusterModel;
 use Gnello\Mattermost\Models\CommandModel;
 use Gnello\Mattermost\Models\ComplianceModel;
+use Gnello\Mattermost\Models\DataRetentionModel;
 use Gnello\Mattermost\Models\ElasticsearchModel;
 use Gnello\Mattermost\Models\EmojiModel;
 use Gnello\Mattermost\Models\FileModel;
@@ -259,5 +260,13 @@ class Driver
     public function getReactionModel()
     {
         return $this->getModel(ReactionModel::class);
+    }
+
+    /**
+     * @return DataRetentionModel
+     */
+    public function getDataRetentionModel()
+    {
+        return $this->getModel(DataRetentionModel::class);
     }
 }
