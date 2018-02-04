@@ -23,6 +23,7 @@ use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\JobModel;
 use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\OAuthModel;
+use Gnello\Mattermost\Models\PluginModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\PreferenceModel;
 use Gnello\Mattermost\Models\ReactionModel;
@@ -277,5 +278,13 @@ class Driver
     public function getJobModel()
     {
         return $this->getModel(JobModel::class);
+    }
+
+    /**
+     * @return PluginModel
+     */
+    public function getPluginModel()
+    {
+        return $this->getModel(PluginModel::class);
     }
 }
