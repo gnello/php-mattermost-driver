@@ -33,7 +33,7 @@ class ChannelModel extends AbstractModel
      */
     public function createChannel(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/create', $requestOptions);
+        return $this->client->post(self::$endpoint, $requestOptions);
     }
 
     /**
