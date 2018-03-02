@@ -1,6 +1,6 @@
 # php-mattermost-driver (v4)
 
-[![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6]
+[![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6] [![Total Downloads][11]][12]
 
 Completed Php Driver to interact with the [Mattermost Web Service API][4].  
 
@@ -123,3 +123,5 @@ $result = $driver->getPreferenceModel($userId)->getUserPreference();
 [8]: https://packagist.org/packages/gnello/php-mattermost-driver
 [9]: https://github.com/gnello/php-mattermost-driver/tree/v1.3.0
 [10]: https://github.com/gnello/laravel-mattermost-driver
+[11]: https://poser.pugx.org/gnello/php-mattermost-driver/downloads
+[12]: https://packagist.org/packages/gnello/php-mattermost-driver
