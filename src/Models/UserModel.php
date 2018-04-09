@@ -276,6 +276,15 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * @param $userId
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function revokeAllUserSessions($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/sessions/revoke/all');
+    }
+
+    /**
      * @param $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
