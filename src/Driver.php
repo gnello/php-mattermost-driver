@@ -27,6 +27,7 @@ use Gnello\Mattermost\Models\PluginModel;
 use Gnello\Mattermost\Models\PostModel;
 use Gnello\Mattermost\Models\PreferenceModel;
 use Gnello\Mattermost\Models\ReactionModel;
+use Gnello\Mattermost\Models\RoleModel;
 use Gnello\Mattermost\Models\SAMLModel;
 use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
@@ -68,6 +69,7 @@ class Driver
      * Driver constructor.
      *
      * @param Container $container
+     * @throws \Exception
      */
     public function __construct(Container $container)
     {
@@ -286,5 +288,13 @@ class Driver
     public function getPluginModel()
     {
         return $this->getModel(PluginModel::class);
+    }
+
+    /**
+     * @return RoleModel
+     */
+    public function getRoleModel()
+    {
+        return $this->getModel(RoleModel::class);
     }
 }
