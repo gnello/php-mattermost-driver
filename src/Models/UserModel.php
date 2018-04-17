@@ -69,7 +69,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getUsersByIds(array $requestOptions)
@@ -191,17 +191,17 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function resetPassword(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/password/reset', $requestOptions);
     }
-    
+
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function updateUserMfa($userId, array $requestOptions)
@@ -210,8 +210,8 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function generateMfaSecret($userId, array $requestOptions)
@@ -220,7 +220,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function checkMfa(array $requestOptions)
@@ -229,8 +229,8 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function updateUserPassword($userId, array $requestOptions)
@@ -239,7 +239,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function sendPasswordResetEmail(array $requestOptions)
@@ -285,7 +285,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function attachMobileDevice(array $requestOptions)
@@ -330,8 +330,8 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function createToken($userId, array $requestOptions)
@@ -340,8 +340,8 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getTokens($userId, array $requestOptions)
@@ -359,12 +359,39 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $requestOptions
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function revokeToken(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/tokens/revoke', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function disablePersonalAccessToken(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/tokens/disable', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function enablePersonalAccessToken(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/tokens/enable', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function searchTokens(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/tokens/search', $requestOptions);
     }
     
     /**
@@ -377,8 +404,8 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
-     * @param $requestOptions
+     * @param       $userId
+     * @param array $requestOptions
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function updateUserStatus($userId, array $requestOptions)
@@ -386,4 +413,13 @@ class UserModel extends AbstractModel
         return $this->client->put(self::$endpoint . '/' . $userId . '/status', $requestOptions);
     }
 
+    /**
+     * @param       $userId
+     * @param array $requestOptions
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function updateUserAuthenticationMethod($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/auth', $requestOptions);
+    }
 }
