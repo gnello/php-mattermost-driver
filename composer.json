@@ -1,6 +1,6 @@
 {
     "name": "gnello/php-mattermost-driver",
-    "description": "Completed Php Driver to interact with the Mattermost Web Service API",
+    "description": "The Php Driver to interact with the Mattermost Web Service API",
     "keywords": ["mattermost", "chat"],
     "homepage": "https://github.com/gnello/php-mattermost-driver",
     "license": "MIT",
