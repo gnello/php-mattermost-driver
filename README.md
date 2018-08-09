@@ -2,7 +2,7 @@
 
 [![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6] [![Total Downloads][11]][12]
 
-Completed Php Driver to interact with the [Mattermost Web Service API][4].  
+The Php Driver to interact with the [Mattermost Web Service API][4].  
 
 Please read [the api documentation][1] for further information on using this application.
 
