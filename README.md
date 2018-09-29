@@ -122,7 +122,7 @@ $result = $driver->getPostModel()->createPost([
 $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 ```
 
-##Endpoints supported  
+## Endpoints supported  
 
 - [Brand](https://api.mattermost.com/#tag/brand)
 - [Channels](https://api.mattermost.com/#tag/channels)
