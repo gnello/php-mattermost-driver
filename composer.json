@@ -16,6 +16,7 @@
     },
     "require": {
         "php": ">=5.5.0",
+        "ext-json": "*",
         "psr/http-message" : "^1.0",
         "pimple/pimple"    : "~3.0",
         "guzzlehttp/guzzle": "^6.2"
