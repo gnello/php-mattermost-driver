@@ -59,56 +59,95 @@ if ($result->getStatusCode() == 200) {
 }
 
 ```
-### User data model
+### Users endpoint
 ```php
 //Add a new user
-$requestOptions = [
+$result = $driver->getUserModel()->createUser([
     'email'    => 'test@test.com', 
     'username' => 'test', 
     'password' => 'testpsw'
-];
-$result = $driver->getUserModel()->createUser($requestOptions);
+]);
 
 //Get a user
 $result = $driver->getUserModel()->getUserByUsername('username');
 ```
 
-### Channel data model
+### Channels endpoint
 ```php
 //Create a channel
-$requestOptions = [
+$result = $driver->getChannelModel()->createChannel([
     'name'         => 'new_channel',
     'display_name' => 'New Channel',
     'type'         => 'O',
-];
-$result = $driver->getChannelModel()->createChannel($requestOptions);
+]);
 
 
 //Get a channel
 $result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_to_return', 'new_channel');
 ```
 
-### Post data model
+### Posts endpoint
 ```php
 //Create a post
-$requestOptions = [
-    'channel_id'    => 'channel_id',
-    'message'       => 'hello world!'
-];
-$result = $driver->getPostModel()->createPost($requestOptions);
+$result = $driver->getPostModel()->createPost([
+    'channel_id' => 'The channel ID to post in',
+    'messages' => 'The message contents, can be formatted with Markdown',
+]);
 
 
 //Get a post
-$postId = 'post_id_of_the_post_to_return';
-$result = $driver->getPostModel()->getPost($postId);
+$result = $driver->getPostModel()->getPost('post_id_of_the_post_to_return');
 ```
 
-### Preference data model
+### Files endpoint
+```php
+//Upload a file
+$result = $driver->getFileModel()->uploadFile([
+    'channel_id' => 'The ID of the channel that this file will be uploaded to',
+    'filename' => 'The name of the file to be uploaded',
+    'files' => 'A file to be uploaded',
+]);
+
+//Send a post with the file just uploaded
+$result = $driver->getPostModel()->createPost([
+    'channel_id' => 'The channel ID to post in',
+    'messages' => 'The message contents, can be formatted with Markdown',
+    'file_ids' => 'A list of file IDs to associate with the post',
+]);
+```
+
+### Preferences endpoint
 ```php
 //Get a list of the user's preferences
-$userId = 'user_id';
-$result = $driver->getPreferenceModel($userId)->getUserPreference();
+$result = $driver->getPreferenceModel('user_id')->getUserPreference();
 ```
+
+##Endpoints supported  
+
+- [Brand](https://api.mattermost.com/#tag/brand)
+- [Channels](https://api.mattermost.com/#tag/channels)
+- [Cluster](https://api.mattermost.com/#tag/cluster)
+- [Commands](https://api.mattermost.com/#tag/commands)
+- [Compliance](https://api.mattermost.com/#tag/compliance)
+- [DataRetention](https://api.mattermost.com/#tag/dataretention)
+- [Elasticsearch](https://api.mattermost.com/#tag/elasticsearch)
+- [Emoji](https://api.mattermost.com/#tag/emoji)
+- [Files](https://api.mattermost.com/#tag/files)
+- [Jobs](https://api.mattermost.com/#tag/jobs)
+- [LDAP](https://api.mattermost.com/#tag/LDAP)
+- [OAuth](https://api.mattermost.com/#tag/OAuth)
+- [Plugins](https://api.mattermost.com/#tag/plugins)
+- [Posts](https://api.mattermost.com/#tag/posts)
+- [Preferences](https://api.mattermost.com/#tag/preferences)
+- [Reaction](https://api.mattermost.com/#tag/reactions)
+- [Roles](https://api.mattermost.com/#tag/roles)
+- [SAML](https://api.mattermost.com/#tag/SAML)
+- [Schemes](https://api.mattermost.com/#tag/schemes)
+- [Status](https://api.mattermost.com/#tag/status)
+- [System](https://api.mattermost.com/#tag/system)
+- [Teams](https://api.mattermost.com/#tag/teams)
+- [Users](https://api.mattermost.com/#tag/users)
+- [Webhooks](https://api.mattermost.com/#tag/webhooks)
 
 ## Contact
 - luca@gnello.com

@@ -12,9 +12,9 @@
 namespace Gnello\Mattermost\Models;
 
 /**
- * Class BrandModel
+ * Class LDAPModel
  *
- * @package Gnello\MattermostRestApi\Models
+ * @package Gnello\Mattermost\Models
  */
 class LDAPModel extends AbstractModel
 {

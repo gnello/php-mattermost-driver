@@ -29,6 +29,7 @@ use Gnello\Mattermost\Models\PreferenceModel;
 use Gnello\Mattermost\Models\ReactionModel;
 use Gnello\Mattermost\Models\RoleModel;
 use Gnello\Mattermost\Models\SAMLModel;
+use Gnello\Mattermost\Models\SchemeModel;
 use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
@@ -296,5 +297,13 @@ class Driver
     public function getRoleModel()
     {
         return $this->getModel(RoleModel::class);
+    }
+
+    /**
+     * @return SchemeModel
+     */
+    public function getSchemeModel()
+    {
+        return $this->getModel(SchemeModel::class);
     }
 }
