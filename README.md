@@ -139,7 +139,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 - [Plugins](https://api.mattermost.com/#tag/plugins)
 - [Posts](https://api.mattermost.com/#tag/posts)
 - [Preferences](https://api.mattermost.com/#tag/preferences)
-- [Reaction](https://api.mattermost.com/#tag/reactions)
+- [Reactions](https://api.mattermost.com/#tag/reactions)
 - [Roles](https://api.mattermost.com/#tag/roles)
 - [SAML](https://api.mattermost.com/#tag/SAML)
 - [Schemes](https://api.mattermost.com/#tag/schemes)
