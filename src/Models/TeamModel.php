@@ -15,7 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class TeamModel
@@ -31,7 +32,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createTeam(array $requestOptions)
     {
@@ -40,7 +41,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeams(array $requestOptions)
     {
@@ -49,7 +50,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeam($teamId)
     {
@@ -59,7 +60,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateTeam($teamId, array $requestOptions)
     {
@@ -68,7 +69,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteTeam($teamId)
     {
@@ -78,7 +79,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchTeam($teamId, array $requestOptions)
     {
@@ -87,7 +88,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamByName($teamName)
     {
@@ -96,7 +97,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function searchTeams(array $requestOptions)
     {
@@ -105,7 +106,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function checkTeamExists($teamName)
     {
@@ -114,7 +115,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserTeams($userId)
     {
@@ -124,7 +125,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamMembers($teamId, array $requestOptions)
     {
@@ -134,7 +135,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function addUser($teamId, array $requestOptions)
     {
@@ -143,7 +144,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function addUserFromInvite(array $requestOptions)
     {
@@ -153,7 +154,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function addMultipleUsers($teamId, array $requestOptions)
     {
@@ -163,7 +164,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamMembersForUser($userId, array $requestOptions)
     {
@@ -173,7 +174,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamMember($teamId, $userId)
     {
@@ -184,7 +185,7 @@ class TeamModel extends AbstractModel
      * @param       $teamId
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removeUser($teamId, $userId, array $requestOptions)
     {
@@ -194,7 +195,7 @@ class TeamModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamMembersByIds($teamId, array $requestOptions)
     {
@@ -203,7 +204,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamStats($teamId)
     {
@@ -214,7 +215,7 @@ class TeamModel extends AbstractModel
      * @param $teamId
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateTeamMemberRoles($teamId, $userId, array $requestOptions)
     {
@@ -223,7 +224,7 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserTotalUnreadMessagesFromTeams($userId)
     {
@@ -233,7 +234,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $userId
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserTotalUnreadMessagesFromTeam($userId, $teamId)
     {
@@ -243,7 +244,7 @@ class TeamModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function inviteUsersByEmail($teamId, array $requestOptions)
     {
@@ -253,16 +254,16 @@ class TeamModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function importTeamFromOtherApplication($teamId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
      * @param $teamId
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getInviteInfoForTeam($teamId)
     {
@@ -272,7 +273,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPublicChannels($teamId, array $requestOptions)
     {
@@ -282,7 +283,7 @@ class TeamModel extends AbstractModel
     /**
      * @param $teamId
      * @param array $requestOptions
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getDeletedChannels($teamId, array $requestOptions)
     {
@@ -292,7 +293,7 @@ class TeamModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function searchChannels($teamId, array $requestOptions)
     {

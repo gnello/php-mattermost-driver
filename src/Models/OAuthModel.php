@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class OAuthModel
  *
@@ -25,7 +27,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function registerOAuthApp(array $requestOptions)
     {
@@ -34,7 +36,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getOAuthApps(array $requestOptions)
     {
@@ -43,7 +45,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param $appId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getOAuthApp($appId)
     {
@@ -52,7 +54,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param $appId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteOAuthApp($appId)
     {
@@ -61,7 +63,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param $appId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function regenerateOAuthAppSecret($appId)
     {
@@ -70,7 +72,7 @@ class OAuthModel extends AbstractModel
 
     /**
      * @param $appId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getOAuthAppInfo($appId)
     {
@@ -80,7 +82,7 @@ class OAuthModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getAuthorizedOAuthApps($userId, array $requestOptions)
     {

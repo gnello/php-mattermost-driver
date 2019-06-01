@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SystemModel
@@ -26,7 +27,7 @@ class SystemModel extends AbstractModel
     private static $endpoint = '/system';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function pingServer()
     {
@@ -34,7 +35,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function recycleDatabaseConnections()
     {
@@ -43,7 +44,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function sendTestEmail()
     {
@@ -52,7 +53,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getConfiguration()
     {
@@ -62,7 +63,7 @@ class SystemModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateConfiguration(array $requestOptions)
     {
@@ -71,7 +72,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function reloadConfiguration()
     {
@@ -81,7 +82,7 @@ class SystemModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getClientConfiguration(array $requestOptions)
     {
@@ -91,7 +92,7 @@ class SystemModel extends AbstractModel
 
     /**
      * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getClientLicense(array $requestOptions)
     {
@@ -100,7 +101,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removeLicenseFile()
     {
@@ -110,17 +111,17 @@ class SystemModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadLicenseFile(array $requestOptions)
     {
         $customEndpoint = '/license';
-        return $this->client->post($customEndpoint, $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post($customEndpoint, $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getAudits(array $requestOptions)
     {
@@ -129,7 +130,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function invalidateAllCaches()
     {
@@ -139,7 +140,7 @@ class SystemModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getLogs(array $requestOptions)
     {
@@ -149,7 +150,7 @@ class SystemModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function addLogMessage(array $requestOptions)
     {
@@ -158,7 +159,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getWebRtcToken()
     {
@@ -167,7 +168,7 @@ class SystemModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getAnalytics()
     {

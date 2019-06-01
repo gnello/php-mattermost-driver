@@ -16,6 +16,7 @@
 namespace Gnello\Mattermost\Models;
 
 use Gnello\Mattermost\Client;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class PreferenceModel
@@ -47,7 +48,7 @@ class PreferenceModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserPreference()
     {
@@ -56,7 +57,7 @@ class PreferenceModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function saveUserPreferences(array $requestOptions)
     {
@@ -65,7 +66,7 @@ class PreferenceModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteUserPreferences(array $requestOptions)
     {
@@ -74,7 +75,7 @@ class PreferenceModel extends AbstractModel
 
     /**
      * @param $category
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listUserPreferences($category)
     {
@@ -84,7 +85,7 @@ class PreferenceModel extends AbstractModel
     /**
      * @param $category
      * @param $preferenceName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getSpecificUserPreference($category, $preferenceName)
     {

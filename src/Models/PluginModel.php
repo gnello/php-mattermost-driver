@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class PluginModel
@@ -27,15 +28,15 @@ class PluginModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadPlugin(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPlugins()
     {
@@ -44,7 +45,7 @@ class PluginModel extends AbstractModel
 
     /**
      * @param $pluginId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removePlugin($pluginId)
     {
@@ -53,7 +54,7 @@ class PluginModel extends AbstractModel
 
     /**
      * @param $pluginId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function activePlugin($pluginId)
     {
@@ -62,7 +63,7 @@ class PluginModel extends AbstractModel
 
     /**
      * @param $pluginId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deactivePlugin($pluginId)
     {
@@ -70,7 +71,7 @@ class PluginModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getWebappPlugins()
     {

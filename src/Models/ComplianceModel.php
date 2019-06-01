@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class ComplianceModel
  *
@@ -25,7 +27,7 @@ class ComplianceModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createReport(array $requestOptions)
     {
@@ -34,7 +36,7 @@ class ComplianceModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getReports(array $requestOptions)
     {
@@ -43,7 +45,7 @@ class ComplianceModel extends AbstractModel
 
     /**
      * @param $reportId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getReport($reportId)
     {
@@ -52,7 +54,7 @@ class ComplianceModel extends AbstractModel
 
     /**
      * @param       $reportId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function downloadReport($reportId)
     {

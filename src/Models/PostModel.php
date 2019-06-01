@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class PostModel
  *
@@ -29,7 +31,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createPost(array $requestOptions)
     {
@@ -38,7 +40,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPost($postId)
     {
@@ -47,7 +49,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deletePost($postId)
     {
@@ -57,7 +59,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $postId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updatePost($postId, array $requestOptions)
     {
@@ -67,7 +69,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $postId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchPost($postId, array $requestOptions)
     {
@@ -76,7 +78,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getThread($postId)
     {
@@ -86,7 +88,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getFlaggedPosts($userId, array $requestOptions)
     {
@@ -95,7 +97,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param       $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getFileInfoForPost($postId)
     {
@@ -105,7 +107,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPostsForChannel($channelId, array $requestOptions)
     {
@@ -115,7 +117,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function searchForTeamPosts($teamId, array $requestOptions)
     {
@@ -124,7 +126,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param       $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function pinPost($postId)
     {
@@ -133,7 +135,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param       $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function unpinPost($postId)
     {
@@ -143,7 +145,7 @@ class PostModel extends AbstractModel
     /**
      * @param       $postId
      * @param       $actionId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function performPostAction($postId, $actionId)
     {
@@ -152,7 +154,7 @@ class PostModel extends AbstractModel
 
     /**
      * @param $postId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getReactions($postId)
     {

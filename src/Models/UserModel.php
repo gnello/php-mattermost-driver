@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class UserEntity
@@ -27,7 +28,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function loginToUserAccount(array $requestOptions)
     {
@@ -35,7 +36,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function logoutOfUserAccount()
     {
@@ -43,7 +44,7 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getAuthenticatedUser()
     {
@@ -52,7 +53,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createUser(array $requestOptions)
     {
@@ -61,7 +62,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUsers(array $requestOptions)
     {
@@ -70,7 +71,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUsersByIds(array $requestOptions)
     {
@@ -79,7 +80,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function searchUsers(array $requestOptions)
     {
@@ -88,7 +89,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function autocompleteUsers(array $requestOptions)
     {
@@ -97,7 +98,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUser($userId)
     {
@@ -107,7 +108,7 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUser($userId, array $requestOptions)
     {
@@ -116,7 +117,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deactivateUserAccount($userId)
     {
@@ -126,7 +127,7 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchUser($userId, array $requestOptions)
     {
@@ -136,7 +137,7 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserRoles($userId, array $requestOptions)
     {
@@ -146,7 +147,7 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserActive($userId, array $requestOptions)
     {
@@ -155,7 +156,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserProfileImage($userId)
     {
@@ -165,16 +166,16 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function setUserProfileImage($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
      * @param $username
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserByUsername($username)
     {
@@ -183,7 +184,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUsersByUsernames(array $requestOptions)
     {
@@ -192,7 +193,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function resetPassword(array $requestOptions)
     {
@@ -202,7 +203,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserMfa($userId, array $requestOptions)
     {
@@ -212,7 +213,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function generateMfaSecret($userId, array $requestOptions)
     {
@@ -221,7 +222,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function checkMfa(array $requestOptions)
     {
@@ -231,7 +232,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserPassword($userId, array $requestOptions)
     {
@@ -240,7 +241,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function sendPasswordResetEmail(array $requestOptions)
     {
@@ -249,7 +250,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $email
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserByEmail($email)
     {
@@ -258,7 +259,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserSessions($userId)
     {
@@ -268,7 +269,7 @@ class UserModel extends AbstractModel
     /**
      * @param $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function revokeUserSession($userId, array $requestOptions)
     {
@@ -277,7 +278,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function revokeAllUserSessions($userId)
     {
@@ -286,7 +287,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function attachMobileDevice(array $requestOptions)
     {
@@ -295,7 +296,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserAudits($userId)
     {
@@ -304,7 +305,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function verifyUserEmail(array $requestOptions)
     {
@@ -313,7 +314,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function sendVerificationEmail(array $requestOptions)
     {
@@ -322,7 +323,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function switchLoginMethod(array $requestOptions)
     {
@@ -332,7 +333,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createToken($userId, array $requestOptions)
     {
@@ -342,7 +343,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTokens($userId, array $requestOptions)
     {
@@ -351,7 +352,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param $tokenId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getToken($tokenId)
     {
@@ -360,7 +361,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function revokeToken(array $requestOptions)
     {
@@ -369,7 +370,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function disablePersonalAccessToken(array $requestOptions)
     {
@@ -378,7 +379,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function enablePersonalAccessToken(array $requestOptions)
     {
@@ -387,7 +388,7 @@ class UserModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function searchTokens(array $requestOptions)
     {
@@ -396,7 +397,7 @@ class UserModel extends AbstractModel
     
     /**
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUserStatus($userId)
     {
@@ -406,7 +407,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserStatus($userId, array $requestOptions)
     {
@@ -416,7 +417,7 @@ class UserModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateUserAuthenticationMethod($userId, array $requestOptions)
     {

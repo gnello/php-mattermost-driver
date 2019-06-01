@@ -15,7 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class FileModel
@@ -31,16 +32,16 @@ class FileModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadFile(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
      * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getFile($fileId)
     {
@@ -49,7 +50,7 @@ class FileModel extends AbstractModel
 
     /**
      * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getFilesThumbnail($fileId)
     {
@@ -58,7 +59,7 @@ class FileModel extends AbstractModel
 
     /**
      * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getFilesPreview($fileId)
     {
@@ -67,7 +68,7 @@ class FileModel extends AbstractModel
 
     /**
      * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPublicFileLink($fileId)
     {
@@ -76,7 +77,7 @@ class FileModel extends AbstractModel
 
     /**
      * @param $fileId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getMetadataForFile($fileId)
     {

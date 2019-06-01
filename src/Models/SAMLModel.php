@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SAMLModel
@@ -26,7 +27,7 @@ class SAMLModel extends AbstractModel
     private static $endpoint = '/saml';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getMetadata()
     {
@@ -35,15 +36,15 @@ class SAMLModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadIDPCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/idp', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/idp', $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removeIDPCertificate()
     {
@@ -52,15 +53,15 @@ class SAMLModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadPublicCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/public', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/public', $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removePublicCertificate()
     {
@@ -69,15 +70,15 @@ class SAMLModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadPrivateCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/private', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/private', $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removePrivateCertificate()
     {
@@ -85,7 +86,7 @@ class SAMLModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getCertificateStatus()
     {

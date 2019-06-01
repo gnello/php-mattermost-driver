@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class BrandModel
@@ -26,7 +27,7 @@ class BrandModel extends AbstractModel
     private static $endpoint = '/brand';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getBrandImage()
     {
@@ -35,10 +36,10 @@ class BrandModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function uploadBrandImage(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/image', $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint . '/image', $requestOptions, RequestOptions::MULTIPART);
     }
 }

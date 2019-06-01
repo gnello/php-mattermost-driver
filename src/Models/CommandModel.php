@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class CommandModel
  *
@@ -25,7 +27,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createCommand(array $requestOptions)
     {
@@ -34,7 +36,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listCommandsForTeam(array $requestOptions)
     {
@@ -43,7 +45,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listAutocompleteCommands($teamId)
     {
@@ -53,7 +55,7 @@ class CommandModel extends AbstractModel
     /**
      * @param       $commandId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateCommand($commandId, array $requestOptions)
     {
@@ -62,7 +64,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param $commandId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteCommand($commandId)
     {
@@ -71,7 +73,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param $commandId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function generateNewToken($commandId)
     {
@@ -80,7 +82,7 @@ class CommandModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function executeCommand(array $requestOptions)
     {

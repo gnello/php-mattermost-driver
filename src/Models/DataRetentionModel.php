@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class DataRetentionModel
  *
@@ -24,7 +26,7 @@ class DataRetentionModel extends AbstractModel
     private static $endpoint = '/data_retention';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getPolicyDetails()
     {

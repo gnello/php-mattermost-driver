@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class ElasticsearchModel
  *
@@ -24,7 +26,7 @@ class ElasticsearchModel extends AbstractModel
     private static $endpoint = '/elasticsearch';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function testElasticsearchConfiguration()
     {
@@ -32,7 +34,7 @@ class ElasticsearchModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function purgeAllElasticsearchIndexes()
     {

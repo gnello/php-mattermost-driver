@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class ChannelModel
  *
@@ -29,7 +31,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createChannel(array $requestOptions)
     {
@@ -38,7 +40,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createDirectMessageChannel(array $requestOptions)
     {
@@ -47,7 +49,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createGroupMessageChannel(array $requestOptions)
     {
@@ -57,7 +59,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $teamId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelsListByIds($teamId, array $requestOptions)
     {
@@ -66,7 +68,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannel($channelId)
     {
@@ -76,7 +78,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateChannel($channelId, array $requestOptions)
     {
@@ -85,7 +87,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteChannel($channelId)
     {
@@ -95,7 +97,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchChannel($channelId, array $requestOptions)
     {
@@ -104,7 +106,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param       $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function restoreChannel($channelId)
     {
@@ -113,7 +115,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelStatistics($channelId)
     {
@@ -122,7 +124,7 @@ class ChannelModel extends AbstractModel
 
     /**
      * @param $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelsPinnedPosts($channelId)
     {
@@ -132,7 +134,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $teamId
      * @param $channelName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelByName($teamId, $channelName)
     {
@@ -142,7 +144,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $teamName
      * @param $channelName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelByNameAndTeamName($teamName, $channelName)
     {
@@ -152,7 +154,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelMembers($channelId, array $requestOptions)
     {
@@ -162,7 +164,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function addUser($channelId, array $requestOptions)
     {
@@ -172,7 +174,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $channelId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelMembersByIds($channelId, array $requestOptions)
     {
@@ -182,7 +184,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $channelId
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelMember($channelId, $userId)
     {
@@ -192,7 +194,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $channelId
      * @param $userId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function removeUserFromChannel($channelId, $userId)
     {
@@ -203,7 +205,7 @@ class ChannelModel extends AbstractModel
      * @param       $channelId
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateChannelRoles($channelId, $userId, array $requestOptions)
     {
@@ -214,7 +216,7 @@ class ChannelModel extends AbstractModel
      * @param       $channelId
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateChannelNotifications($channelId, $userId, array $requestOptions)
     {
@@ -224,7 +226,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param       $userId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function viewChannel($userId, array $requestOptions)
     {
@@ -234,7 +236,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $userId
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelMembersForTheUser($userId, $teamId)
     {
@@ -244,7 +246,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $userId
      * @param $teamId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelsForUser($userId, $teamId)
     {
@@ -254,7 +256,7 @@ class ChannelModel extends AbstractModel
     /**
      * @param $userId
      * @param $channelId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getUnreadMessages($userId, $channelId)
     {

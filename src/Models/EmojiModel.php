@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class EmojiModel
@@ -27,16 +28,16 @@ class EmojiModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createCustomEmoji(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, Client::TYPE_MULTIPART);
+        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
     }
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getListOfCustomEmoji(array $requestOptions)
     {
@@ -45,7 +46,7 @@ class EmojiModel extends AbstractModel
 
     /**
      * @param $emojiId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getCustomEmoji($emojiId)
     {
@@ -54,7 +55,7 @@ class EmojiModel extends AbstractModel
 
     /**
      * @param $emojiId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteCustomEmoji($emojiId)
     {
@@ -63,7 +64,7 @@ class EmojiModel extends AbstractModel
 
     /**
      * @param $emojiId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getCustomEmojiImage($emojiId)
     {

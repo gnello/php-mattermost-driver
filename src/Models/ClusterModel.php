@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class ClusterModel
  *
@@ -24,7 +26,7 @@ class ClusterModel extends AbstractModel
     private static $endpoint = '/cluster';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getClusterStatus()
     {

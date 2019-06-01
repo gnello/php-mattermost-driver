@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class RoleModel
  *
@@ -25,7 +27,7 @@ class RoleModel extends AbstractModel
 
     /**
      * @param $roleId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getRoleByRoleId($roleId)
     {
@@ -34,7 +36,7 @@ class RoleModel extends AbstractModel
 
     /**
      * @param $roleName
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getRoleByRoleName($roleName)
     {
@@ -44,7 +46,7 @@ class RoleModel extends AbstractModel
     /**
      * @param       $roleId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchRole($roleId, array $requestOptions)
     {
@@ -53,7 +55,7 @@ class RoleModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getRolesListByName(array $requestOptions)
     {

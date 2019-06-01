@@ -15,6 +15,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class ReactionModel
  *
@@ -29,7 +31,7 @@ class ReactionModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function saveReaction(array $requestOptions)
     {

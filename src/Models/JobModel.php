@@ -11,7 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
-use Gnello\Mattermost\Client;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class JobModel
@@ -27,16 +28,16 @@ class JobModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getJobs(array $requestOptions = [])
     {
-        return $this->client->get(self::$endpoint, $requestOptions, Client::TYPE_QUERY);
+        return $this->client->get(self::$endpoint, $requestOptions, RequestOptions::QUERY);
     }
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createJob(array $requestOptions)
     {
@@ -45,7 +46,7 @@ class JobModel extends AbstractModel
 
     /**
      * @param $jobId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getJob($jobId)
     {
@@ -54,7 +55,7 @@ class JobModel extends AbstractModel
 
     /**
      * @param $jobId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteJob($jobId)
     {
@@ -64,7 +65,7 @@ class JobModel extends AbstractModel
     /**
      * @param       $type
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getJobsOfType($type, array $requestOptions = [])
     {

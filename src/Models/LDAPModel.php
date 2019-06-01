@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class LDAPModel
  *
@@ -24,7 +26,7 @@ class LDAPModel extends AbstractModel
     private static $endpoint = '/ldap';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function syncWithLDAP()
     {
@@ -32,7 +34,7 @@ class LDAPModel extends AbstractModel
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function testLDAPConfiguration()
     {

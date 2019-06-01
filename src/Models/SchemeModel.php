@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class SchemeModel
  *
@@ -24,7 +26,7 @@ class SchemeModel extends AbstractModel
     private static $endpoint = '/schemes';
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getSchemes()
     {
@@ -33,7 +35,7 @@ class SchemeModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createScheme(array $requestOptions)
     {
@@ -42,7 +44,7 @@ class SchemeModel extends AbstractModel
 
     /**
      * @param $schemeId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getScheme($schemeId)
     {
@@ -51,7 +53,7 @@ class SchemeModel extends AbstractModel
 
     /**
      * @param $schemeId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteScheme($schemeId)
     {
@@ -61,7 +63,7 @@ class SchemeModel extends AbstractModel
     /**
      * @param       $schemeId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function patchScheme($schemeId, array $requestOptions)
     {
@@ -71,7 +73,7 @@ class SchemeModel extends AbstractModel
     /**
      * @param       $schemeId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getTeamsOfScheme($schemeId, array $requestOptions)
     {
@@ -81,7 +83,7 @@ class SchemeModel extends AbstractModel
     /**
      * @param       $schemeId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getChannelsOfScheme($schemeId, array $requestOptions)
     {

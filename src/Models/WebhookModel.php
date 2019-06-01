@@ -11,6 +11,8 @@
 
 namespace Gnello\Mattermost\Models;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Class WebhookModel
  *
@@ -25,7 +27,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createIncomingWebhook(array $requestOptions)
     {
@@ -34,7 +36,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listIncomingWebhooks(array $requestOptions)
     {
@@ -43,7 +45,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param       $hookId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getIncomingWebhook($hookId)
     {
@@ -53,7 +55,7 @@ class WebhookModel extends AbstractModel
     /**
      * @param       $hookId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateIncomingWebhook($hookId, array $requestOptions)
     {
@@ -62,7 +64,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function createOutgoingWebhook(array $requestOptions)
     {
@@ -71,7 +73,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function listOutgoingWebhooks(array $requestOptions)
     {
@@ -80,7 +82,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param       $hookId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function getOutgoingWebhook($hookId)
     {
@@ -89,7 +91,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param       $hookId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function deleteOutgoingWebhook($hookId)
     {
@@ -99,7 +101,7 @@ class WebhookModel extends AbstractModel
     /**
      * @param       $hookId
      * @param array $requestOptions
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function updateOutgoingWebhook($hookId, array $requestOptions)
     {
@@ -108,7 +110,7 @@ class WebhookModel extends AbstractModel
 
     /**
      * @param       $hookId
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function regenerateTokenForOutgoingWebhook($hookId)
     {
