@@ -16,8 +16,10 @@
 namespace Gnello\Mattermost;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\ResponseInterface;
 use Pimple\Container;
 
 /**
@@ -27,10 +29,6 @@ use Pimple\Container;
  */
 class Client
 {
-    const TYPE_JSON = 'json';
-    const TYPE_QUERY = 'query';
-    const TYPE_MULTIPART = 'multipart';
-
     /**
      * @var string
      */
@@ -50,7 +48,6 @@ class Client
      * Client constructor.
      *
      * @param Container $container
-     * @throws \Exception
      */
     public function __construct(Container $container)
     {
@@ -69,7 +66,7 @@ class Client
      */
     public function setToken($token)
     {
-        $this->headers['headers'] = ['Authorization' => 'Bearer ' . $token];
+        $this->headers = ['Authorization' => 'Bearer ' . $token];
     }
 
     /**
@@ -86,9 +83,12 @@ class Client
      * @param $type
      * @return array
      */
-    private function makeOptions($options, $type)
+    private function buildOptions($options, $type)
     {
-        return array_merge($this->headers, [$type => $options]);
+        return [
+            RequestOptions::HEADERS => $this->headers,
+            $type => $options,
+        ];
     }
 
     /**
@@ -96,16 +96,18 @@ class Client
      * @param       $uri
      * @param       $type
      * @param array $options
-     * @return null|\Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     private function dispatch($method, $uri, $type, array $options = [])
     {
         try {
-            $response = $this->client->{$method}($this->makeUri($uri), $this->makeOptions($options, $type));
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
-        } catch (ServerException $e) {
-            $response = $e->getResponse();
+            $response = $this->client->{$method}($this->makeUri($uri), $this->buildOptions($options, $type));
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+            } else {
+                $response = new Response(500, [], $e->getMessage());
+            }
         }
 
         return $response;
@@ -115,9 +117,9 @@ class Client
      * @param        $uri
      * @param array  $options
      * @param string $type
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function get($uri, array $options = [], $type = self::TYPE_QUERY)
+    public function get($uri, array $options = [], $type = RequestOptions::QUERY)
     {
         return $this->dispatch('get', $uri, $type, $options);
     }
@@ -126,9 +128,9 @@ class Client
      * @param        $uri
      * @param array  $options
      * @param string $type
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function post($uri, $options = [], $type = self::TYPE_JSON)
+    public function post($uri, $options = [], $type = RequestOptions::JSON)
     {
         return $this->dispatch('post', $uri, $type, $options);
     }
@@ -137,9 +139,9 @@ class Client
      * @param        $uri
      * @param array  $options
      * @param string $type
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function put($uri, $options = [], $type = self::TYPE_JSON)
+    public function put($uri, $options = [], $type = RequestOptions::JSON)
     {
         return $this->dispatch('put', $uri, $type, $options);
     }
@@ -148,9 +150,9 @@ class Client
      * @param        $uri
      * @param array  $options
      * @param string $type
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function delete($uri, $options = [], $type = self::TYPE_JSON)
+    public function delete($uri, $options = [], $type = RequestOptions::JSON)
     {
         return $this->dispatch('delete', $uri, $type, $options);
     }
