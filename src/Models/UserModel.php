@@ -174,6 +174,24 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function deleteUserProfileImage($userId)
+    {
+        return $this->client->delete(self::$endpoint . '/' . $userId . '/image');
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function returnUserDefaultProfileImage($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/image/default');
+    }
+
+    /**
      * @param $username
      * @return ResponseInterface
      */
@@ -422,5 +440,13 @@ class UserModel extends AbstractModel
     public function updateUserAuthenticationMethod($userId, array $requestOptions)
     {
         return $this->client->put(self::$endpoint . '/' . $userId . '/auth', $requestOptions);
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getTotalCountOfUsersInTheSystem()
+    {
+        return $this->client->get(self::$endpoint . '/stats');
     }
 }

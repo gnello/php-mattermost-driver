@@ -70,7 +70,6 @@ class Driver
      * Driver constructor.
      *
      * @param Container $container
-     * @throws \Exception
      */
     public function __construct(Container $container)
     {
