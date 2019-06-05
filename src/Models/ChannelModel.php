@@ -63,7 +63,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelsListByIds($teamId, array $requestOptions)
     {
-        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/ids', $requestOptions);
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/ids', $requestOptions);
     }
 
     /**
@@ -138,7 +138,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelByName($teamId, $channelName)
     {
-        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/name/' . $channelName);
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/name/' . $channelName);
     }
 
     /**
@@ -148,7 +148,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelByNameAndTeamName($teamName, $channelName)
     {
-        return $this->client->get(TeamModel::$endpoint . '/name/' . $teamName . '/' . self::$endpoint . '/name/' . $channelName);
+        return $this->client->get(TeamModel::$endpoint . '/name/' . $teamName . self::$endpoint . '/name/' . $channelName);
     }
 
     /**
@@ -240,7 +240,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelMembersForTheUser($userId, $teamId)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/' . TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint . '/members');
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/' . TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/members');
     }
 
     /**
@@ -250,7 +250,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelsForUser($userId, $teamId)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/' . TeamModel::$endpoint . '/' . $teamId . '/' . self::$endpoint);
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/' . TeamModel::$endpoint . '/' . $teamId . self::$endpoint);
     }
 
     /**
@@ -260,6 +260,65 @@ class ChannelModel extends AbstractModel
      */
     public function getUnreadMessages($userId, $channelId)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/' . self::$endpoint . '/' . $channelId . '/unread');
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . self::$endpoint . '/' . $channelId . '/unread');
+    }
+
+    /**
+     * @param $channelId
+     * @return ResponseInterface
+     */
+    public function convertChannelFromPublicToPrivate($channelId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $channelId . '/convert');
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getPublicChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint, $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getDeletedChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/deleted', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function autocompleteChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/autocomplete', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function autocompleteChannelsForSearch($teamId, array $requestOptions)
+    {
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search_autocomplete', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function searchChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search', $requestOptions);
     }
 }
