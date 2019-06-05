@@ -70,6 +70,8 @@ $result = $driver->getUserModel()->createUser([
 
 //Get a user
 $result = $driver->getUserModel()->getUserByUsername('username');
+
+//Please read the UserModel class or refer to the api documentation for a complete list of available methods.
 ```
 
 ### Channels endpoint
@@ -84,6 +86,8 @@ $result = $driver->getChannelModel()->createChannel([
 
 //Get a channel
 $result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_to_return', 'new_channel');
+
+//Please read the ChannelModel class or refer to the api documentation for a complete list of available methods.
 ```
 
 ### Posts endpoint
@@ -97,6 +101,8 @@ $result = $driver->getPostModel()->createPost([
 
 //Get a post
 $result = $driver->getPostModel()->getPost('post_id_of_the_post_to_return');
+
+//Please read the PostModel class or refer to the api documentation for a complete list of available methods.
 ```
 
 ### Files endpoint
@@ -114,12 +120,16 @@ $result = $driver->getPostModel()->createPost([
     'messages' => 'The message contents, can be formatted with Markdown',
     'file_ids' => 'A list of file IDs to associate with the post',
 ]);
+
+//Please read the FileModel class or refer to the api documentation for a complete list of available methods.
 ```
 
 ### Preferences endpoint
 ```php
 //Get a list of the user's preferences
 $result = $driver->getPreferenceModel('user_id')->getUserPreference();
+
+//Please read the PreferenceModel class or refer to the api documentation for a complete list of available methods.
 ```
 
 ## Endpoints supported  
@@ -148,6 +158,8 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 - [Teams](https://api.mattermost.com/#tag/teams)
 - [Users](https://api.mattermost.com/#tag/users)
 - [Webhooks](https://api.mattermost.com/#tag/webhooks)
+
+Don't you see the endpoint you need? Feel free to open an issue or a PR!
 
 ## Contact
 - luca@gnello.com
