@@ -85,7 +85,7 @@ $result = $driver->getChannelModel()->createChannel([
 
 
 //Get a channel
-$result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channels_to_return', 'new_channel');
+$result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channel_to_return', 'new_channel');
 
 //Please read the ChannelModel class or refer to the api documentation for a complete list of available methods.
 ```
