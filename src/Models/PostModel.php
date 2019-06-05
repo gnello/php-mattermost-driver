@@ -160,4 +160,13 @@ class PostModel extends AbstractModel
     {
         return $this->client->get(self::$endpoint . '/' . $postId . '/reactions');
     }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function createEphemeralPost(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/ephemeral', $requestOptions);
+    }
 }
