@@ -105,6 +105,20 @@ class Driver
     }
 
     /**
+     * @param $token
+     * @return boolean
+     */
+    public function authenticateWithToken($token = null)
+    {
+        if ($token != null) {
+            $this->container['client']->setToken($token);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * @param $className
      * @return mixed
      */
