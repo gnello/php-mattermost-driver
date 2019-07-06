@@ -96,16 +96,16 @@ class Driver
         $driverOptions = $this->container['driver'];
 
         if (isset($driverOptions['token'])) {
+
             $this->container['client']->setToken($driverOptions['token']);
             $response = $this->getUserModel()->getAuthenticatedUser();
 
         } else if (isset($driverOptions['login_id']) && isset($driverOptions['password'])) {
-            $requestOptions = [
+
+            $response = $this->getUserModel()->loginToUserAccount([
                 'login_id' => $driverOptions['login_id'],
                 'password' => $driverOptions['password']
-            ];
-
-            $response = $this->getUserModel()->loginToUserAccount($requestOptions);
+            ]);
 
             if ($response->getStatusCode() == 200) {
                 $token = $response->getHeader('Token')[0];
@@ -113,6 +113,7 @@ class Driver
             }
 
         } else {
+
             $response = new Response(401, [], json_encode([
                 "id" => "missing.credentials.",
                 "message" => "You must provide a login_id and password or a valid token.",
@@ -120,6 +121,7 @@ class Driver
                 "request_id" => "",
                 "status_code" => 401,
             ]));
+
         }
 
         return $response;

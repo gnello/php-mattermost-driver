@@ -29,31 +29,38 @@ composer require gnello/php-mattermost-driver:1.*
 ## Usage
 ### Authentication
 
+#### Login id and password
 ```php
  use \Gnello\Mattermost\Driver;
-
- //login and password authentication
+ 
  $container = new \Pimple\Container([
-     'driver'    => [
-         'url'       => 'your_chat_url',
-         'login_id'  => 'your_login_id',
-         'password'  => 'your_password',
+     'driver' => [
+         'url' => 'your_chat_url',
+         'login_id' => 'your_login_id',
+         'password' => 'your_password',
      ],
-     'guzzle'    => [
+     'guzzle' => [
          //put here any options for Guzzle
      ]
  ]);
+ 
+ $driver = new Driver($container);
+ $result = $driver->authenticate();
+ ```
 
- //token authentication
-  $container = new \Pimple\Container([
-      'driver'    => [
-          'url'       => 'your_chat_url',
-          'token'     => 'your_token',
-      ],
-      'guzzle'    => [
-          //put here any options for Guzzle
-      ]
-  ]);
+#### Token
+```php
+ use \Gnello\Mattermost\Driver;
+ 
+ $container = new \Pimple\Container([
+     'driver' => [
+         'url' => 'your_chat_url',
+         'token' => 'your_token',
+     ],
+     'guzzle' => [
+         //put here any options for Guzzle
+     ]
+ ]);
  
  $driver = new Driver($container);
  $result = $driver->authenticate();
