@@ -34,6 +34,7 @@ use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
+use GuzzleHttp\Psr7\Response;
 use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 
@@ -50,11 +51,11 @@ class Driver
      * @var array
      */
     private $defaultOptions = [
-        'scheme'    => 'https',
-        'basePath'  => '/api/v4',
-        'url'       => 'localhost',
-        'login_id'  => null,
-        'password'  => null,
+        'scheme' => 'https',
+        'basePath' => '/api/v4',
+        'url' => 'localhost',
+        'login_id' => null,
+        'password' => null,
     ];
 
     /**
@@ -75,9 +76,11 @@ class Driver
     public function __construct(Container $container)
     {
         $driverOptions = $this->defaultOptions;
+
         if (isset($container['driver'])) {
             $driverOptions = array_merge($driverOptions, $container['driver']);
         }
+
         $container['driver'] = $driverOptions;
         $container['client'] = new Client($container);
 
@@ -90,16 +93,32 @@ class Driver
     public function authenticate()
     {
         $driverOptions = $this->container['driver'];
-        $requestOptions = [
-            'login_id' => $driverOptions['login_id'],
-            'password' => $driverOptions['password']
-        ];
 
-        $response = $this->getUserModel()->loginToUserAccount($requestOptions);
+        if (isset($driverOptions['token'])) {
+            $this->container['client']->setToken($driverOptions['token']);
+            $response = $this->getUserModel()->getAuthenticatedUser();
 
-        if ($response->getStatusCode() == 200) {
-            $token = $response->getHeader('Token')[0];
-            $this->container['client']->setToken($token);
+        } else if (isset($driverOptions['login_id']) && isset($driverOptions['password'])) {
+            $requestOptions = [
+                'login_id' => $driverOptions['login_id'],
+                'password' => $driverOptions['password']
+            ];
+
+            $response = $this->getUserModel()->loginToUserAccount($requestOptions);
+
+            if ($response->getStatusCode() == 200) {
+                $token = $response->getHeader('Token')[0];
+                $this->container['client']->setToken($token);
+            }
+
+        } else {
+            $response = new Response(401, [], json_encode([
+                "id" => "missing.credentials.",
+                "message" => "You must provide a login_id and password or a valid token.",
+                "detailed_error" => "",
+                "request_id" => "",
+                "status_code" => 401,
+            ]));
         }
 
         return $response;
