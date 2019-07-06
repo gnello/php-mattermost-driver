@@ -56,6 +56,7 @@ class Driver
         'url' => 'localhost',
         'login_id' => null,
         'password' => null,
+        'token' => null,
     ];
 
     /**

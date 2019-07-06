@@ -32,6 +32,7 @@ composer require gnello/php-mattermost-driver:1.*
 ```php
  use \Gnello\Mattermost\Driver;
 
+ //login and password authentication
  $container = new \Pimple\Container([
      'driver'    => [
          'url'       => 'your_chat_url',
@@ -42,6 +43,17 @@ composer require gnello/php-mattermost-driver:1.*
          //put here any options for Guzzle
      ]
  ]);
+
+ //token authentication
+  $container = new \Pimple\Container([
+      'driver'    => [
+          'url'       => 'your_chat_url',
+          'token'     => 'your_token',
+      ],
+      'guzzle'    => [
+          //put here any options for Guzzle
+      ]
+  ]);
  
  $driver = new Driver($container);
  $result = $driver->authenticate();
