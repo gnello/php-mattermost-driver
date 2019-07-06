@@ -35,6 +35,7 @@ use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
 use Pimple\Container;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Driver
@@ -84,7 +85,7 @@ class Driver
     }
 
     /**
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     public function authenticate()
     {
