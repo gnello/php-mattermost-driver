@@ -36,6 +36,22 @@ class FileModel extends AbstractModel
      */
     public function uploadFile(array $requestOptions)
     {
+        $requestOptions = [
+            [
+                'name' => 'channel_id',
+                'contents' => empty($requestOptions['channel_id']) ? null : $requestOptions['channel_id'],
+            ],
+            [
+                'name' => 'files',
+                'filename' => empty($requestOptions['filename']) ? null : $requestOptions['filename'],
+                'contents' => empty($requestOptions['files']) ? null : $requestOptions['files'],
+            ],
+            [
+                'name' => 'client_ids',
+                'contents' => empty($requestOptions['client_ids']) ? null : $requestOptions['client_ids'],
+            ],
+        ];
+
         return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
     }
 

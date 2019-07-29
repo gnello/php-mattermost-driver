@@ -130,7 +130,7 @@ $result = $driver->getPostModel()->getPost('post_id_of_the_post_to_return');
 $result = $driver->getFileModel()->uploadFile([
     'channel_id' => 'The ID of the channel that this file will be uploaded to',
     'filename' => 'The name of the file to be uploaded',
-    'files' => 'A file to be uploaded',
+    'files' => fopen('Path of a file to be uploaded', 'rb'),
 ]);
 
 //Send a post with the file just uploaded
