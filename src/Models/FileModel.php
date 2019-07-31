@@ -36,7 +36,7 @@ class FileModel extends AbstractModel
      */
     public function uploadFile(array $requestOptions)
     {
-        $requestOptions = [
+        $internalRequestOptions = [
             [
                 'name' => 'channel_id',
                 'contents' => empty($requestOptions['channel_id']) ? null : $requestOptions['channel_id'],
@@ -46,13 +46,16 @@ class FileModel extends AbstractModel
                 'filename' => empty($requestOptions['filename']) ? null : $requestOptions['filename'],
                 'contents' => empty($requestOptions['files']) ? null : $requestOptions['files'],
             ],
-            [
-                'name' => 'client_ids',
-                'contents' => empty($requestOptions['client_ids']) ? null : $requestOptions['client_ids'],
-            ],
         ];
 
-        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
+        if (isset($requestOptions['client_ids'])) {
+            $internalRequestOptions[] = [
+                'name' => 'client_ids',
+                'contents' => $requestOptions['client_ids'],
+            ];
+        }
+
+        return $this->client->post(self::$endpoint, $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**
