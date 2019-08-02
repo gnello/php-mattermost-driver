@@ -40,7 +40,9 @@ class SAMLModel extends AbstractModel
      */
     public function uploadIDPCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/idp', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
+
+        return $this->client->post(self::$endpoint . '/certificate/idp', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**
@@ -57,7 +59,9 @@ class SAMLModel extends AbstractModel
      */
     public function uploadPublicCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/public', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
+
+        return $this->client->post(self::$endpoint . '/certificate/public', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**
@@ -74,7 +78,9 @@ class SAMLModel extends AbstractModel
      */
     public function uploadPrivateCertificate(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/certificate/private', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
+
+        return $this->client->post(self::$endpoint . '/certificate/private', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

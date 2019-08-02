@@ -32,7 +32,9 @@ class PluginModel extends AbstractModel
      */
     public function uploadPlugin(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['plugin']);
+
+        return $this->client->post(self::$endpoint, $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

@@ -170,7 +170,9 @@ class UserModel extends AbstractModel
      */
     public function setUserProfileImage($userId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
+
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

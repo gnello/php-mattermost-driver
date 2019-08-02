@@ -38,4 +38,36 @@ abstract class AbstractModel
     {
         $this->client = $client;
     }
+
+    /**
+     * Builds multipart data options.
+     *
+     * @param array $requestOptions The options to pass to the server.
+     * @param array $requiredFields The required fields of the server.
+     * @return array
+     */
+    protected static function buildMultipartDataOptions(array $requestOptions = [], array $requiredFields = [])
+    {
+        $multipartDataOptions = [];
+
+        //required fields
+        foreach ($requiredFields as $field) {
+            $multipartDataOptions[] = [
+                'name' => $field,
+                'contents' => empty($requestOptions[$field]) ? null : $requestOptions[$field],
+            ];
+
+            unset($requestOptions[$field]);
+        }
+
+        //optional fields
+        foreach ($requestOptions as $field => $value) {
+            $multipartDataOptions[] = [
+                'name' => $field,
+                'contents' => empty($value) ? null : $value,
+            ];
+        }
+
+        return $multipartDataOptions;
+    }
 }

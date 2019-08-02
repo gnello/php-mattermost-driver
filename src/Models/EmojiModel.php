@@ -32,7 +32,9 @@ class EmojiModel extends AbstractModel
      */
     public function createCustomEmoji(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint, $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image', 'emoji']);
+
+        return $this->client->post(self::$endpoint, $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

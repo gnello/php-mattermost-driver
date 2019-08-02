@@ -258,7 +258,9 @@ class TeamModel extends AbstractModel
      */
     public function importTeamFromOtherApplication($teamId, array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['file', 'filesize', 'importFrom']);
+
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

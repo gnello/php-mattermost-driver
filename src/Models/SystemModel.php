@@ -116,7 +116,9 @@ class SystemModel extends AbstractModel
     public function uploadLicenseFile(array $requestOptions)
     {
         $customEndpoint = '/license';
-        return $this->client->post($customEndpoint, $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['license']);
+
+        return $this->client->post($customEndpoint, $internalRequestOptions, RequestOptions::MULTIPART);
     }
 
     /**

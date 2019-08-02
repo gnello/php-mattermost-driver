@@ -40,6 +40,8 @@ class BrandModel extends AbstractModel
      */
     public function uploadBrandImage(array $requestOptions)
     {
-        return $this->client->post(self::$endpoint . '/image', $requestOptions, RequestOptions::MULTIPART);
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
+
+        return $this->client->post(self::$endpoint . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
     }
 }
