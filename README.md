@@ -153,6 +153,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 
 ## Endpoints supported  
 
+- [Bots](https://api.mattermost.com/#tag/bots)
 - [Brand](https://api.mattermost.com/#tag/brand)
 - [Channels](https://api.mattermost.com/#tag/channels)
 - [Cluster](https://api.mattermost.com/#tag/cluster)

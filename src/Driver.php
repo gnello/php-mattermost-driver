@@ -11,6 +11,7 @@
 
 namespace Gnello\Mattermost;
 
+use Gnello\Mattermost\Models\BotModel;
 use Gnello\Mattermost\Models\BrandModel;
 use Gnello\Mattermost\Models\ChannelModel;
 use Gnello\Mattermost\Models\ClusterModel;
@@ -327,5 +328,13 @@ class Driver
     public function getSchemeModel()
     {
         return $this->getModel(SchemeModel::class);
+    }
+
+    /**
+     * @return BotModel
+     */
+    public function getBotModel()
+    {
+        return $this->getModel(BotModel::class);
     }
 }
