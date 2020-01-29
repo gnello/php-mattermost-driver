@@ -106,6 +106,11 @@ $result = $driver->getChannelModel()->createChannel([
 //Get a channel
 $result = $driver->getChannelModel()->getChannelByName('team_id_of_the_channel_to_return', 'new_channel');
 
+//Search a channel
+$result = $driver->getChannelModel()->searchChannels($teamId, [
+    'term' => "full or partial name or display name of channels"
+]);
+
 //Please read the ChannelModel class or refer to the api documentation for a complete list of available methods.
 ```
 
