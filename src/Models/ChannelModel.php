@@ -319,6 +319,6 @@ class ChannelModel extends AbstractModel
      */
     public function searchChannels($teamId, array $requestOptions)
     {
-        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search', $requestOptions);
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search', $requestOptions);
     }
 }
