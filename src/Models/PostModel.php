@@ -172,6 +172,16 @@ class PostModel extends AbstractModel
 
     /**
      * @param $userId
+     * @param $postId
+     * @return ResponseInterface
+     */
+    public function markAsUnread($userId, $postId)
+    {
+        return $this->client->post(UserModel::$endpoint . '/' . $userId . self::$endpoint . '/' . $postId . '/set_unread');
+    }
+
+    /**
+     * @param $userId
      * @param $channelId
      * @return ResponseInterface
      */
