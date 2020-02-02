@@ -256,6 +256,16 @@ class TeamModel extends AbstractModel
      * @param array $requestOptions
      * @return ResponseInterface
      */
+    public function inviteGuestsByEmail($teamId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/invite-guests/email', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
     public function importTeamFromOtherApplication($teamId, array $requestOptions)
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['file', 'filesize', 'importFrom']);

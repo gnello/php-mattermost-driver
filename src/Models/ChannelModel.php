@@ -368,4 +368,14 @@ class ChannelModel extends AbstractModel
     {
         return $this->client->get(self::$endpoint . $channelId . '/members_minus_group_members', $requestOptions);
     }
+
+    /**
+     * @param       $channelId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateChannelPrivacy($channelId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $channelId . '/privacy', $requestOptions);
+    }
 }

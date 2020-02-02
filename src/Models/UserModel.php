@@ -460,4 +460,22 @@ class UserModel extends AbstractModel
     {
         return $this->client->get(self::$endpoint . '/stats');
     }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function promoteGuestToUser($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/promote');
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function demoteUserToGuest($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/demote');
+    }
 }
