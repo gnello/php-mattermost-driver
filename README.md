@@ -169,6 +169,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 - [Emoji](https://api.mattermost.com/#tag/emoji)
 - [Files](https://api.mattermost.com/#tag/files)
 - [Groups](https://api.mattermost.com/#tag/groups)
+- [Integration Actions](https://api.mattermost.com/#tag/integration_actions)
 - [Jobs](https://api.mattermost.com/#tag/jobs)
 - [LDAP](https://api.mattermost.com/#tag/LDAP)
 - [OAuth](https://api.mattermost.com/#tag/OAuth)

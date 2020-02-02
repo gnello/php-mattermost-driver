@@ -22,6 +22,7 @@ use Gnello\Mattermost\Models\ElasticsearchModel;
 use Gnello\Mattermost\Models\EmojiModel;
 use Gnello\Mattermost\Models\FileModel;
 use Gnello\Mattermost\Models\GroupModel;
+use Gnello\Mattermost\Models\IntegrationActionsModel;
 use Gnello\Mattermost\Models\JobModel;
 use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\OAuthModel;
@@ -345,5 +346,13 @@ class Driver
     public function getGroupModel()
     {
         return $this->getModel(GroupModel::class);
+    }
+
+    /**
+     * @return IntegrationActionsModel
+     */
+    public function getIntegrationActionsModel()
+    {
+        return $this->getModel(IntegrationActionsModel::class);
     }
 }
