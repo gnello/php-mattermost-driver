@@ -82,6 +82,15 @@ class UserModel extends AbstractModel
      * @param array $requestOptions
      * @return ResponseInterface
      */
+    public function getUsersByGroupChannelsIds(array $requestOptions = [])
+    {
+        return $this->client->post(self::$endpoint . '/group_channels', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
     public function searchUsers(array $requestOptions)
     {
         return $this->client->post(self::$endpoint . '/search', $requestOptions);

@@ -169,4 +169,15 @@ class PostModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/ephemeral', $requestOptions);
     }
+
+    /**
+     * @param $userId
+     * @param $channelId
+     * @return ResponseInterface
+     */
+    public function getPostsAroundLastUnread($userId, $channelId)
+    {
+        return $this->client->get(UserModel::$endpoint . '/' . $userId .
+            ChannelModel::$endpoint . '/' . $channelId . self::$endpoint . '/unread');
+    }
 }

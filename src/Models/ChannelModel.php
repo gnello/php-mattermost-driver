@@ -358,4 +358,14 @@ class ChannelModel extends AbstractModel
     {
         return $this->client->post('/group/search', $requestOptions);
     }
+
+    /**
+     * @param       $channelId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getMembersMinusGroupMembers($channelId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . $channelId . '/members_minus_group_members', $requestOptions);
+    }
 }
