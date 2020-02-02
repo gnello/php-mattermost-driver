@@ -44,4 +44,12 @@ class BrandModel extends AbstractModel
 
         return $this->client->post(self::$endpoint . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
     }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function deleteCurrentBrandImage()
+    {
+        return $this->client->delete(self::$endpoint . '/image');
+    }
 }

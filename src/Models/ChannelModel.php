@@ -76,6 +76,15 @@ class ChannelModel extends AbstractModel
     }
 
     /**
+     * @param $channelId
+     * @return ResponseInterface
+     */
+    public function getTimezone($channelId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $channelId . '/timezones');
+    }
+
+    /**
      * @param       $channelId
      * @param array $requestOptions
      * @return ResponseInterface
@@ -320,5 +329,33 @@ class ChannelModel extends AbstractModel
     public function searchChannels($teamId, array $requestOptions)
     {
         return $this->client->post(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function searchArchivedChannels($teamId, array $requestOptions)
+    {
+        return $this->client->post(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/search_archived', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function searchAllPrivateAndOpenTypeChannels(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/search', $requestOptions);
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function searchGroupChannels(array $requestOptions)
+    {
+        return $this->client->post('/group/search', $requestOptions);
     }
 }
