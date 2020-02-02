@@ -21,6 +21,7 @@ use Gnello\Mattermost\Models\DataRetentionModel;
 use Gnello\Mattermost\Models\ElasticsearchModel;
 use Gnello\Mattermost\Models\EmojiModel;
 use Gnello\Mattermost\Models\FileModel;
+use Gnello\Mattermost\Models\GroupModel;
 use Gnello\Mattermost\Models\JobModel;
 use Gnello\Mattermost\Models\LDAPModel;
 use Gnello\Mattermost\Models\OAuthModel;
@@ -336,5 +337,13 @@ class Driver
     public function getBotModel()
     {
         return $this->getModel(BotModel::class);
+    }
+
+    /**
+     * @return GroupModel
+     */
+    public function getGroupModel()
+    {
+        return $this->getModel(GroupModel::class);
     }
 }

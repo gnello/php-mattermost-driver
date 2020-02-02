@@ -168,6 +168,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 - [Elasticsearch](https://api.mattermost.com/#tag/elasticsearch)
 - [Emoji](https://api.mattermost.com/#tag/emoji)
 - [Files](https://api.mattermost.com/#tag/files)
+- [Groups](https://api.mattermost.com/#tag/groups)
 - [Jobs](https://api.mattermost.com/#tag/jobs)
 - [LDAP](https://api.mattermost.com/#tag/LDAP)
 - [OAuth](https://api.mattermost.com/#tag/OAuth)
