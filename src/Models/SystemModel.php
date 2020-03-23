@@ -91,6 +91,16 @@ class SystemModel extends AbstractModel
     }
 
     /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function patchConfiguration(array $requestOptions)
+    {
+        $customEndpoint = '/config';
+        return $this->client->put($customEndpoint . '/patch', $requestOptions);
+    }
+
+    /**
      * @param $requestOptions
      * @return ResponseInterface
      */
@@ -176,5 +186,33 @@ class SystemModel extends AbstractModel
     {
         $customEndpoint = '/analytics';
         return $this->client->get($customEndpoint . '/old');
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function setServerBusyFlag(array $requestOptions)
+    {
+        $customEndpoint = '/server_busy';
+        return $this->client->post($customEndpoint, $requestOptions);
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getServerBusyExpiryTime()
+    {
+        $customEndpoint = '/server_busy';
+        return $this->client->get($customEndpoint);
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function clearServerBusyFlag()
+    {
+        $customEndpoint = '/server_busy';
+        return $this->client->delete($customEndpoint);
     }
 }
