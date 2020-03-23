@@ -212,6 +212,45 @@ class TeamModel extends AbstractModel
     }
 
     /**
+     * @param       $teamId
+     * @return ResponseInterface
+     */
+    public function regenerateInviteID($teamId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/regenerate_invite_id');
+    }
+
+    /**
+     * @param $teamId
+     * @return ResponseInterface
+     */
+    public function getTeamIcon($teamId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $teamId . '/image');
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function setTeamIcon($teamId, array $requestOptions)
+    {
+        $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
+
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
+    }
+
+    /**
+     * @param $teamId
+     * @return ResponseInterface
+     */
+    public function removeTeamIcon($teamId)
+    {
+        return $this->client->delete(self::$endpoint . '/' . $teamId . '/image');
+    }
+
+    /**
      * @param $teamId
      * @param $userId
      * @param array $requestOptions
@@ -219,7 +258,18 @@ class TeamModel extends AbstractModel
      */
     public function updateTeamMemberRoles($teamId, $userId, array $requestOptions)
     {
-        return $this->client->get(self::$endpoint . '/' . $teamId . '/members/' . $userId . '/roles', $requestOptions);
+        return $this->client->put(self::$endpoint . '/' . $teamId . '/members/' . $userId . '/roles', $requestOptions);
+    }
+
+    /**
+     * @param $teamId
+     * @param $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateSchemeDerivedRolesOfMember($teamId, $userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $teamId . '/members/' . $userId . '/schemeRoles', $requestOptions);
     }
 
     /**
@@ -262,6 +312,14 @@ class TeamModel extends AbstractModel
     }
 
     /**
+     * @return ResponseInterface
+     */
+    public function invalidateActiveEmailInvitations()
+    {
+        return $this->client->delete(self::$endpoint . '/invites/email');
+    }
+
+    /**
      * @param       $teamId
      * @param array $requestOptions
      * @return ResponseInterface
@@ -280,6 +338,26 @@ class TeamModel extends AbstractModel
     public function getInviteInfoForTeam($teamId)
     {
         return $this->client->get(self::$endpoint . '/invite/' . $teamId);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function setTeamScheme($teamId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $teamId . '/scheme', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getTeamMembersMinusGroupMembers($teamId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/' . $teamId . '/members_minus_group_members', $requestOptions);
     }
 
     /**
