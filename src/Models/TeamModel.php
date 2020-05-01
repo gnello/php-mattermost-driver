@@ -87,6 +87,25 @@ class TeamModel extends AbstractModel
     }
 
     /**
+     * @param $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateTeamPrivacy($teamId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $teamId . '/privacy', $requestOptions);
+    }
+
+    /**
+     * @param $teamId
+     * @return ResponseInterface
+     */
+    public function restoreTeam($teamId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/restore');
+    }
+
+    /**
      * @param $teamName
      * @return ResponseInterface
      */
@@ -184,12 +203,11 @@ class TeamModel extends AbstractModel
     /**
      * @param       $teamId
      * @param       $userId
-     * @param array $requestOptions
      * @return ResponseInterface
      */
-    public function removeUser($teamId, $userId, array $requestOptions)
+    public function removeUser($teamId, $userId)
     {
-        return $this->client->delete(self::$endpoint . '/' . $teamId . '/members/' . $userId, $requestOptions);
+        return $this->client->delete(self::$endpoint . '/' . $teamId . '/members/' . $userId);
     }
 
     /**
@@ -274,11 +292,12 @@ class TeamModel extends AbstractModel
 
     /**
      * @param $userId
+     * @param array $requestOptions
      * @return ResponseInterface
      */
-    public function getUserTotalUnreadMessagesFromTeams($userId)
+    public function getUserTotalUnreadMessagesFromTeams($userId,  array $requestOptions = [])
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/teams/unread');
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/teams/unread', $requestOptions);
     }
 
     /**
@@ -332,12 +351,12 @@ class TeamModel extends AbstractModel
     }
 
     /**
-     * @param $teamId
+     * @param $inviteId
      * @return ResponseInterface
      */
-    public function getInviteInfoForTeam($teamId)
+    public function getInviteInfoForTeam($inviteId)
     {
-        return $this->client->get(self::$endpoint . '/invite/' . $teamId);
+        return $this->client->get(self::$endpoint . '/invite/' . $inviteId);
     }
 
     /**
