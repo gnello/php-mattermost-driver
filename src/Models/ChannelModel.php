@@ -67,6 +67,15 @@ class ChannelModel extends AbstractModel
     }
 
     /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getChannelsList(array $requestOptions = [])
+    {
+        return $this->client->get(self::$endpoint, $requestOptions);
+    }
+
+    /**
      * @param $channelId
      * @return ResponseInterface
      */
