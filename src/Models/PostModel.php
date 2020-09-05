@@ -183,11 +183,12 @@ class PostModel extends AbstractModel
     /**
      * @param $userId
      * @param $channelId
+     * @param array $requestOptions
      * @return ResponseInterface
      */
-    public function getPostsAroundLastUnread($userId, $channelId)
+    public function getPostsAroundLastUnread($userId, $channelId, array $requestOptions = [])
     {
         return $this->client->get(UserModel::$endpoint . '/' . $userId .
-            ChannelModel::$endpoint . '/' . $channelId . self::$endpoint . '/unread');
+            ChannelModel::$endpoint . '/' . $channelId . self::$endpoint . '/unread', $requestOptions);
     }
 }
