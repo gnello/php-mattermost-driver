@@ -181,5 +181,14 @@ class GroupModel extends AbstractModel
         return $this->client->get(TeamModel::$endpoint . '/' . $teamId . '/groups', $requestOptions);
     }
 
+    /**
+     * @param $groupId
+     * @return ResponseInterface
+     */
+    public function getGroupStats($groupId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $groupId . '/stats');
+    }
+
 
 }

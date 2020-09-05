@@ -408,4 +408,25 @@ class TeamModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/' . $teamId . '/channels/search', $requestOptions);
     }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function listCommandsAutocompleteData($teamId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/' . $teamId . '/commands/autocomplete_suggestions',
+            $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getTeamGroupsByChannels($teamId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/' . $teamId . '/groups_by_channels', $requestOptions);
+    }
 }

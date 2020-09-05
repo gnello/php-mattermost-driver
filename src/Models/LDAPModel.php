@@ -40,4 +40,13 @@ class LDAPModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/test');
     }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function migrateIdLDAP(array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/migrateid', $requestOptions);
+    }
 }

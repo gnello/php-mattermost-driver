@@ -478,4 +478,57 @@ class UserModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/' . $userId . '/demote');
     }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getUserIdsOfKnownUsers()
+    {
+        return $this->client->get(self::$endpoint  . '/known');
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function getGroupsForUserId($userId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $userId . '/groups');
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function convertUserIntoBot($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/convert_to_bot');
+    }
+
+    /**
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getTotalCountOfUsersMatchingSpecifiedFilters(array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . '/stats/filtered', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function verifyUserEmailById($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/email/verify/member');
+    }
+
+    /**
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function publishUserTypingWebsocketEvent($userId)
+    {
+        return $this->client->post(self::$endpoint . '/' . $userId . '/typing');
+    }
 }

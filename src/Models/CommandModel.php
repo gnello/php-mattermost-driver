@@ -88,4 +88,23 @@ class CommandModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint . '/execute', $requestOptions);
     }
+
+    /**
+     * @param       $commandId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function moveCommand($commandId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $commandId . '/move', $requestOptions);
+    }
+
+    /**
+     * @param       $commandId
+     * @return ResponseInterface
+     */
+    public function getCommand($commandId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $commandId);
+    }
 }

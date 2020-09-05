@@ -215,4 +215,24 @@ class SystemModel extends AbstractModel
         $customEndpoint = '/server_busy';
         return $this->client->delete($customEndpoint);
     }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getWarnMetricsStatus()
+    {
+        $customEndpoint = '/warn_metrics/status';
+        return $this->client->get($customEndpoint);
+    }
+
+    /**
+     * @param       $warnMetricId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function acknowledgeWarningOfMetricStatus($warnMetricId, array $requestOptions)
+    {
+        $customEndpoint = '/warn_metrics/ack';
+        return $this->client->post($customEndpoint . '/' . $warnMetricId, $requestOptions);
+    }
 }

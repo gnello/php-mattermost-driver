@@ -387,4 +387,138 @@ class ChannelModel extends AbstractModel
     {
         return $this->client->put(self::$endpoint . '/' . $channelId . '/privacy', $requestOptions);
     }
+
+    /**
+     * @param       $channelId
+     * @return ResponseInterface
+     */
+    public function getInformationAboutChannelModeration($channelId)
+    {
+        return $this->client->get(self::$endpoint . '/' . $channelId . '/moderations');
+    }
+
+    /**
+     * @param       $channelId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateChannelModerationSettings($channelId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $channelId . '/moderations/patch', $requestOptions);
+    }
+
+    /**
+     * @param $teamId
+     * @param $userId
+     * @return ResponseInterface
+     */
+    public function getUserSidebarCategories($teamId, $userId)
+    {
+        return $this->client->put(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories');
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function createUserSidebarCategory($teamId, $userId, array $requestOptions)
+    {
+        return $this->client->post(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateUserSidebarCategories($teamId, $userId, array $requestOptions)
+    {
+        return $this->client->put(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @return ResponseInterface
+     */
+    public function getUserSidebarCategoryOrder($teamId, $userId)
+    {
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories/order');
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateUserSidebarCategoryOrder($teamId, $userId, array $requestOptions)
+    {
+        return $this->client->put(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories/order', $requestOptions);
+    }
+
+    /**
+     * @param $teamId
+     * @param $userId
+     * @param $categoryId
+     * @return ResponseInterface
+     */
+    public function getSidebarCategory($teamId, $userId, $categoryId)
+    {
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories/' . $categoryId);
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @param       $categoryId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateSidebarCategory($teamId, $userId, $categoryId, array $requestOptions)
+    {
+        return $this->client->put(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories/' . $categoryId, $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param       $userId
+     * @param       $categoryId
+     * @return ResponseInterface
+     */
+    public function deleteSidebarCategory($teamId, $userId, $categoryId)
+    {
+        return $this->client->delete(UserModel::$endpoint . '/' . $userId . TeamModel::$endpoint . '/' . $teamId .
+            self::$endpoint . '/categories/' . $categoryId);
+    }
+
+    /**
+     * @param       $channelId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getChannelMembersCountsForEachGroupThatHasAtLeastOneMember($channelId, array $requestOptions)
+    {
+        return $this->client->get(self::$endpoint . $channelId . '/member_counts_by_group', $requestOptions);
+    }
+
+    /**
+     * @param       $teamId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getPrivateChannels($teamId, array $requestOptions = [])
+    {
+        return $this->client->get(TeamModel::$endpoint . $teamId . '/channels/private', $requestOptions);
+    }
 }

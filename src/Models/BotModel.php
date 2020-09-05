@@ -120,4 +120,13 @@ class BotModel extends AbstractModel
     {
         return $this->client->delete(self::$endpoint . '/' . $botUserId . '/icon');
     }
+
+    /**
+     * @param $botUserId
+     * @return ResponseInterface
+     */
+    public function convertBotIntoUser($botUserId, array $requestOptions)
+    {
+        return $this->client->post(self::$endpoint . '/' . $botUserId . '/convert_to_user', $requestOptions);
+    }
 }
