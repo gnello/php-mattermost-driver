@@ -189,11 +189,9 @@ class Driver
      */
     public function getPreferenceModel($userId)
     {
-        if (!isset($this->models[PreferenceModel::class])) {
-            $this->models[PreferenceModel::class] = new PreferenceModel($this->container['client'], $userId);
-        }
-
-        return $this->models[PreferenceModel::class];
+        // Do not cache this model
+        // see https://github.com/gnello/php-mattermost-driver/issues/32
+        return new PreferenceModel($this->container['client'], $userId);
     }
 
     /**
