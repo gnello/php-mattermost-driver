@@ -39,7 +39,6 @@ class PreferenceModel extends AbstractModel
      * PreferenceModel constructor.
      *
      * @param Client $client
-     * @param        $userId
      */
     public function __construct(Client $client)
     {
