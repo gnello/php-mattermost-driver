@@ -41,10 +41,32 @@ class PreferenceModel extends AbstractModel
      * @param Client $client
      * @param        $userId
      */
-    public function __construct(Client $client, $userId)
+    public function __construct(Client $client)
     {
         parent::__construct($client);
+    }
+
+    /**
+     * @param $userId
+     * @return $this
+     */
+    public function setUserId($userId)
+    {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function getUserId()
+    {
+        if (is_null($this->userId)) {
+            throw new \UnexpectedValueException("User id is not set.");
+        }
+
+        return $this->userId;
     }
 
     /**
@@ -52,7 +74,9 @@ class PreferenceModel extends AbstractModel
      */
     public function getUserPreference()
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences');
+        $userId = $this->getUserId();
+
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/preferences');
     }
 
     /**
@@ -61,7 +85,9 @@ class PreferenceModel extends AbstractModel
      */
     public function saveUserPreferences(array $requestOptions)
     {
-        return $this->client->put(UserModel::$endpoint . '/' . $this->userId . '/preferences', $requestOptions);
+        $userId = $this->getUserId();
+
+        return $this->client->put(UserModel::$endpoint . '/' . $userId . '/preferences', $requestOptions);
     }
 
     /**
@@ -70,7 +96,9 @@ class PreferenceModel extends AbstractModel
      */
     public function deleteUserPreferences(array $requestOptions)
     {
-        return $this->client->post(UserModel::$endpoint . '/' . $this->userId . '/preferences/delete', $requestOptions);
+        $userId = $this->getUserId();
+
+        return $this->client->post(UserModel::$endpoint . '/' . $userId . '/preferences/delete', $requestOptions);
     }
 
     /**
@@ -79,7 +107,9 @@ class PreferenceModel extends AbstractModel
      */
     public function listUserPreferences($category)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences/' . $category);
+        $userId = $this->getUserId();
+
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/preferences/' . $category);
     }
 
     /**
@@ -89,7 +119,9 @@ class PreferenceModel extends AbstractModel
      */
     public function getSpecificUserPreference($category, $preferenceName)
     {
-        return $this->client->get(UserModel::$endpoint . '/' . $this->userId . '/preferences/' . $category . '/name/' . $preferenceName);
+        $userId = $this->getUserId();
+
+        return $this->client->get(UserModel::$endpoint . '/' . $userId . '/preferences/' . $category . '/name/' . $preferenceName);
     }
 
 }
