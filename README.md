@@ -38,9 +38,6 @@ composer require gnello/php-mattermost-driver:1.*
          'url' => 'your_chat_url',
          'login_id' => 'your_login_id',
          'password' => 'your_password',
-     ],
-     'guzzle' => [
-         //put here any options for Guzzle
      ]
  ]);
  
@@ -56,6 +53,33 @@ composer require gnello/php-mattermost-driver:1.*
      'driver' => [
          'url' => 'your_chat_url',
          'token' => 'your_token',
+     ]
+ ]);
+ 
+ $driver = new Driver($container);
+ $result = $driver->authenticate();
+ ```
+
+### Options
+Below a list of all the Driver available options, for the Guzzle options
+please refer to his [official documentation][13].
+
+| Option   | Default     | Description                                                                           |
+|:---------|:------------|:--------------------------------------------------------------------------------------|
+| scheme   | "https"     | The URI scheme.                                                                       |
+| basePath | "/api/v4"   | The base path of the API endpoint.                                                    |
+| url      | "localhost" | The URL of the Mattermost server, without the scheme (es. www.mydomain.com).          |
+| login_id | null        | The account username to use with the API.                                             |
+| password | null        | The account password to use with the API.                                                  |
+| token    | null        | The account token to use the with API, if specified it override the login_id and password. |
+
+You can specify the options as shown in the following example:
+```php
+ use \Gnello\Mattermost\Driver;
+ 
+ $container = new \Pimple\Container([
+     'driver' => [
+         //put here any options for the driver
      ],
      'guzzle' => [
          //put here any options for Guzzle
@@ -204,3 +228,4 @@ Don't you see the endpoint you need? Feel free to open an issue or a PR!
 [10]: https://github.com/gnello/laravel-mattermost-driver
 [11]: https://poser.pugx.org/gnello/php-mattermost-driver/downloads
 [12]: https://packagist.org/packages/gnello/php-mattermost-driver
+[13]: https://docs.guzzlephp.org/en/stable/request-options.html
