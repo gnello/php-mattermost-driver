@@ -64,14 +64,14 @@ composer require gnello/php-mattermost-driver:1.*
 Below a list of all the Driver available options, for the Guzzle options
 please refer to his [official documentation][13].
 
-| Option   | Default     | Description                                                                           |
-|:---------|:------------|:--------------------------------------------------------------------------------------|
-| scheme   | "https"     | The URI scheme.                                                                       |
-| basePath | "/api/v4"   | The base path of the API endpoint.                                                    |
-| url      | "localhost" | The URL of the Mattermost server, without the scheme (es. www.mydomain.com).          |
-| login_id | null        | The account username to use with the API.                                             |
-| password | null        | The account password to use with the API.                                                  |
-| token    | null        | The account token to use the with API, if specified it override the login_id and password. |
+| Option   | Default value | Description                                                                                |
+|:---------|:--------------|:-------------------------------------------------------------------------------------------|
+| scheme   | "https"       | The URI scheme.                                                                            |
+| basePath | "/api/v4"     | The base path of the API endpoint.                                                         |
+| url      | "localhost"   | The URL of the Mattermost server, without the scheme (es. www.mydomain.com).               |
+| login_id | null          | The account username to use with the API.                                                  |
+| password | null          | The account password to use with the API.                                                  |
+| token    | null          | The account token to use the with API, if specified it override the login_id and password. |
 
 You can specify the options as shown in the following example:
 ```php
