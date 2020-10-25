@@ -62,7 +62,7 @@ composer require gnello/php-mattermost-driver:1.*
 
 ### Options
 Below a list of all the Driver available options, for the Guzzle options
-please refer to his [official documentation][13].
+please refer to its [official documentation][13].
 
 | Option   | Default value | Description                                                                                |
 |:---------|:--------------|:-------------------------------------------------------------------------------------------|
