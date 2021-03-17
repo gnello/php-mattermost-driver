@@ -37,4 +37,15 @@ class ReactionModel extends AbstractModel
     {
         return $this->client->post(self::$endpoint, $requestOptions);
     }
+
+    /**
+     * @param $userId
+     * @param $postId
+     * @param $emojiName
+     * @return ResponseInterface
+     */
+    public function deleteReaction($userId, $postId, $emojiName)
+    {
+        return $this->client->delete(UserModel::$endpoint . '/' . $userId . PostModel::$endpoint . '/' . $postId . self::$endpoint . '/' . $emojiName);
+    }
 }
