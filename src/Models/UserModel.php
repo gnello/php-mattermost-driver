@@ -448,6 +448,26 @@ class UserModel extends AbstractModel
      * @param array $requestOptions
      * @return ResponseInterface
      */
+    public function removeUserCustomStatus($userId)
+    {
+        return $this->client->delete(self::$endpoint . '/' . $userId . '/status/custom');
+    }
+
+    /**
+     * @param       $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function updateUserCustomStatus($userId, array $requestOptions)
+    {
+        return $this->client->put(self::$endpoint . '/' . $userId . '/status/custom', $requestOptions);
+    }
+
+    /**
+     * @param       $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
     public function updateUserAuthenticationMethod($userId, array $requestOptions)
     {
         return $this->client->put(self::$endpoint . '/' . $userId . '/auth', $requestOptions);
