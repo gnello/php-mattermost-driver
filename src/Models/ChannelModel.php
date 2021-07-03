@@ -152,11 +152,14 @@ class ChannelModel extends AbstractModel
     /**
      * @param $teamId
      * @param $channelName
+     * @param $include_deleted
      * @return ResponseInterface
      */
-    public function getChannelByName($teamId, $channelName)
+    public function getChannelByName($teamId, $channelName, $include_deleted = false)
     {
-        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/name/' . $channelName);
+        return $this->client->get(TeamModel::$endpoint . '/' . $teamId . self::$endpoint . '/name/' . $channelName, [
+				'include_deleted' => $include_deleted
+			]);
     }
 
     /**
