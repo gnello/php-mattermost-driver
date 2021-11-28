@@ -165,7 +165,7 @@ $result = $driver->getFileModel()->uploadFile([
 //Send a post with the file just uploaded
 $result = $driver->getPostModel()->createPost([
     'channel_id' => 'The channel ID to post in',
-    'messages' => 'The message contents, can be formatted with Markdown',
+    'message' => 'The message contents, can be formatted with Markdown',
     'file_ids' => 'A list of file IDs to associate with the post',
 ]);
 
