@@ -35,6 +35,7 @@ use Gnello\Mattermost\Models\SAMLModel;
 use Gnello\Mattermost\Models\SchemeModel;
 use Gnello\Mattermost\Models\SystemModel;
 use Gnello\Mattermost\Models\TeamModel;
+use Gnello\Mattermost\Models\ThreadModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
 use GuzzleHttp\Psr7\Response;
@@ -353,5 +354,13 @@ class Driver
     public function getIntegrationActionsModel()
     {
         return $this->getModel(IntegrationActionsModel::class);
+    }
+
+    /**
+     * @return ThreadModel
+     */
+    public function getThreadModel()
+    {
+        return $this->getModel(ThreadModel::class);
     }
 }

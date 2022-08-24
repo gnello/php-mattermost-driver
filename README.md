@@ -208,6 +208,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 - [Status](https://api.mattermost.com/#tag/status)
 - [System](https://api.mattermost.com/#tag/system)
 - [Teams](https://api.mattermost.com/#tag/teams)
+- [Threads](https://api.mattermost.com/#tag/threads)
 - [Users](https://api.mattermost.com/#tag/users)
 - [Webhooks](https://api.mattermost.com/#tag/webhooks)
 
