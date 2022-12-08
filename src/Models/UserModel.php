@@ -125,12 +125,13 @@ class UserModel extends AbstractModel
     }
 
     /**
-     * @param $userId
+     * @param       $userId
+     * @param array $requestOptions
      * @return ResponseInterface
      */
-    public function deactivateUserAccount($userId)
+    public function deactivateUserAccount($userId, array $requestOptions = [])
     {
-        return $this->client->delete(self::$endpoint . '/' . $userId);
+        return $this->client->delete(self::$endpoint . '/' . $userId, $requestOptions, RequestOptions::QUERY);
     }
 
     /**
