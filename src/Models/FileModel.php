@@ -15,7 +15,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -55,7 +55,7 @@ class FileModel extends AbstractModel
             ];
         }
 
-        return $this->client->post(self::$endpoint, $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint, $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**

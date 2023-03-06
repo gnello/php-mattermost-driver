@@ -15,7 +15,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -111,7 +111,7 @@ class ChannelModel extends AbstractModel
      */
     public function deleteChannel($channelId, array $requestOptions = [])
     {
-        return $this->client->delete(self::$endpoint . '/' . $channelId, $requestOptions, RequestOptions::QUERY);
+        return $this->client->delete(self::$endpoint . '/' . $channelId, $requestOptions, Client::REQUEST_QUERY);
     }
 
     /**

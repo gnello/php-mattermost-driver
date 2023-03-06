@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -128,7 +128,7 @@ class SystemModel extends AbstractModel
         $customEndpoint = '/license';
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['license']);
 
-        return $this->client->post($customEndpoint, $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post($customEndpoint, $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**
