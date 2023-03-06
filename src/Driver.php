@@ -38,8 +38,8 @@ use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\ThreadModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
+use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Psr7\Response;
-use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -54,7 +54,7 @@ class Driver
      *
      * @var array
      */
-    private $defaultOptions = [
+    const DEFAULT_OPTIONS = [
         'scheme' => 'https',
         'basePath' => '/api/v4',
         'url' => 'localhost',
@@ -63,33 +63,27 @@ class Driver
         'token' => null,
     ];
 
-    /**
-     * @var Container
-     */
-    private $container;
+    /** @var array<string, ?string> */
+    private $driverOptions;
+
+    /** @var Client */
+    private $client;
 
     /**
      * @var array
      */
     private $models = [];
 
-    /**
-     * Driver constructor.
-     *
-     * @param Container $container
-     */
-    public function __construct(Container $container)
+    public function __construct(
+        Guzzle $guzzle,
+        array $driverOptions
+    )
     {
-        $driverOptions = $this->defaultOptions;
-
-        if (isset($container['driver'])) {
-            $driverOptions = array_merge($driverOptions, $container['driver']);
-        }
-
-        $container['driver'] = $driverOptions;
-        $container['client'] = new Client($container);
-
-        $this->container = $container;
+        $this->driverOptions = array_merge(self::DEFAULT_OPTIONS, $driverOptions);
+        $this->client = new Client(
+            $guzzle,
+            $this->driverOptions
+        );
     }
 
     /**
@@ -97,23 +91,21 @@ class Driver
      */
     public function authenticate()
     {
-        $driverOptions = $this->container['driver'];
+        if (isset($this->driverOptions['token'])) {
 
-        if (isset($driverOptions['token'])) {
-
-            $this->container['client']->setToken($driverOptions['token']);
+            $this->client->setToken($this->driverOptions['token']);
             $response = $this->getUserModel()->getAuthenticatedUser();
 
-        } else if (isset($driverOptions['login_id']) && isset($driverOptions['password'])) {
+        } else if (isset($this->driverOptions['login_id']) && isset($this->driverOptions['password'])) {
 
             $response = $this->getUserModel()->loginToUserAccount([
-                'login_id' => $driverOptions['login_id'],
-                'password' => $driverOptions['password']
+                'login_id' => $this->driverOptions['login_id'],
+                'password' => $this->driverOptions['password']
             ]);
 
             if ($response->getStatusCode() == 200) {
                 $token = $response->getHeader('Token')[0];
-                $this->container['client']->setToken($token);
+                $this->client->setToken($token);
             }
 
         } else {
@@ -138,7 +130,7 @@ class Driver
     private function getModel($className)
     {
         if (!isset($this->models[$className])) {
-            $this->models[$className] = new $className($this->container['client']);
+            $this->models[$className] = new $className($this->client);
         }
 
         return $this->models[$className];
