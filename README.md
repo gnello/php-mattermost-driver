@@ -2,7 +2,7 @@
 
 [![Latest Stable Version][7]][8] [![Scrutinizer Code Quality][5]][6] [![Total Downloads][11]][12]
 
-The PHP Driver to interact with the [Mattermost Web Service API][4].  
+The PHP Driver to interact with the [Mattermost Web Service API][4].
 
 Please read [the api documentation][1] for further information on using this application.
 
@@ -31,64 +31,33 @@ composer require gnello/php-mattermost-driver:1.*
 
 #### Login id and password
 ```php
- use \Gnello\Mattermost\Driver;
- 
- $container = new \Pimple\Container([
-     'driver' => [
-         'url' => 'your_chat_url',
-         'login_id' => 'your_login_id',
-         'password' => 'your_password',
-     ]
- ]);
- 
- $driver = new Driver($container);
- $result = $driver->authenticate();
- ```
+use \Gnello\Mattermost\Driver;
+
+// construct your own GuzzleHttp client instance
+$guzzle = new GuzzleHttp/Client(...);
+
+$driver = new Driver($guzzle, [
+    'url' => 'your_chat_url',
+    'login_id' => 'your_login_id',
+    'password' => 'your_password',
+]);
+$result = $driver->authenticate();
+```
 
 #### Token
 ```php
  use \Gnello\Mattermost\Driver;
- 
- $container = new \Pimple\Container([
-     'driver' => [
-         'url' => 'your_chat_url',
-         'token' => 'your_token',
-     ]
- ]);
- 
- $driver = new Driver($container);
- $result = $driver->authenticate();
- ```
 
-### Options
-Below a list of all the Driver available options, for the Guzzle options
-please refer to its [official documentation][13].
+ // construct your own GuzzleHttp client instance
+$guzzle = new GuzzleHttp/Client(...);
 
-| Option   | Default value | Description                                                                                |
-|:---------|:--------------|:-------------------------------------------------------------------------------------------|
-| scheme   | "https"       | The URI scheme.                                                                            |
-| basePath | "/api/v4"     | The base path of the API endpoint.                                                         |
-| url      | "localhost"   | The URL of the Mattermost server, without the scheme (es. "www.mydomain.com").             |
-| login_id | null          | The account username to use with the API.                                                  |
-| password | null          | The account password to use with the API.                                                  |
-| token    | null          | The account token to use with the API, if specified it override the login_id and password. |
+$driver = new Driver($guzzle, [
+    'url' => 'your_chat_url',
+    'token' => 'your_token',
+]);
 
-You can specify the options as shown in the following example:
-```php
- use \Gnello\Mattermost\Driver;
- 
- $container = new \Pimple\Container([
-     'driver' => [
-         //put here any options for the driver
-     ],
-     'guzzle' => [
-         //put here any options for Guzzle
-     ]
- ]);
- 
- $driver = new Driver($container);
- $result = $driver->authenticate();
- ```
+$result = $driver->authenticate();
+```
 
 ### Check results
 This Driver follows the [PSR-7][2] document therefore any response is a ResponseInterface type:
@@ -106,8 +75,8 @@ if ($result->getStatusCode() == 200) {
 ```php
 //Add a new user
 $result = $driver->getUserModel()->createUser([
-    'email'    => 'test@test.com', 
-    'username' => 'test', 
+    'email'    => 'test@test.com',
+    'username' => 'test',
     'password' => 'testpsw'
 ]);
 
@@ -180,7 +149,7 @@ $result = $driver->getPreferenceModel('user_id')->getUserPreference();
 //Please read the PreferenceModel class or refer to the api documentation for a complete list of available methods.
 ```
 
-## Endpoints supported  
+## Endpoints supported
 
 - [Bleve](https://api.mattermost.com/#tag/bleve)
 - [Bots](https://api.mattermost.com/#tag/bots)

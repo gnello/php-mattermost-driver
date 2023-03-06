@@ -20,7 +20,6 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
-use Pimple\Container;
 
 /**
  * Class Client
@@ -44,20 +43,10 @@ class Client
      */
     private $client;
 
-    /**
-     * Client constructor.
-     *
-     * @param Container $container
-     */
-    public function __construct(Container $container)
+    /** @param array<string, ?string> $options */
+    public function __construct(GuzzleClient $guzzle, array $options)
     {
-        $guzzleOptions = [];
-        if (isset($container['guzzle'])) {
-            $guzzleOptions = $container['guzzle'];
-        }
-        $this->client = new GuzzleClient($guzzleOptions);
-
-        $options = $container['driver'];
+        $this->client = $guzzle;
         $this->baseUri = $options['scheme'] . '://' . $options['url'] . $options['basePath'];
     }
 
