@@ -11,7 +11,6 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
 /**

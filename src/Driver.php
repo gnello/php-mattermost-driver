@@ -38,9 +38,11 @@ use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\ThreadModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
-use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Psr7\Response;
+use Nyholm\Psr7\Response;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Class Driver
@@ -75,14 +77,17 @@ class Driver
     private $models = [];
 
     public function __construct(
-        Guzzle $guzzle,
+        ClientInterface $httpClient,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
         array $driverOptions
-    )
-    {
+    ) {
         $this->driverOptions = array_merge(self::DEFAULT_OPTIONS, $driverOptions);
         $this->client = new Client(
-            $guzzle,
-            $driverOptions
+            $httpClient,
+            $requestFactory,
+            $streamFactory,
+            $this->driverOptions['scheme'] . '://' . $this->driverOptions['url'] . $this->driverOptions['basePath']
         );
     }
 
@@ -92,12 +97,9 @@ class Driver
     public function authenticate()
     {
         if (isset($this->driverOptions['token'])) {
-
             $this->client->setToken($this->driverOptions['token']);
             $response = $this->getUserModel()->getAuthenticatedUser();
-
         } else if (isset($this->driverOptions['login_id']) && isset($this->driverOptions['password'])) {
-
             $response = $this->getUserModel()->loginToUserAccount([
                 'login_id' => $this->driverOptions['login_id'],
                 'password' => $this->driverOptions['password']
@@ -107,9 +109,7 @@ class Driver
                 $token = $response->getHeader('Token')[0];
                 $this->client->setToken($token);
             }
-
         } else {
-
             $response = new Response(401, [], json_encode([
                 "id" => "missing.credentials.",
                 "message" => "You must provide a login_id and password or a valid token.",

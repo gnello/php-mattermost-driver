@@ -32,29 +32,55 @@ composer require gnello/php-mattermost-driver:1.*
 #### Login id and password
 ```php
 use \Gnello\Mattermost\Driver;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
-// construct your own GuzzleHttp client instance
-$guzzle = new GuzzleHttp/Client(...);
+// construct or discover your own PSR7 instances
+/** @var ClientInterface */
+$httpClient = ...;
+/** @var RequestFactoryInterface */
+$requestFactory = ...;
+/** @var StreamFactoryInterface */
+$streamFactory = ...;
 
-$driver = new Driver($guzzle, [
-    'url' => 'your_chat_url',
-    'login_id' => 'your_login_id',
-    'password' => 'your_password',
-]);
+$driver = new Driver(
+    $httpClient,
+    $requestFactory,
+    $streamFactory,
+    [
+        'url' => 'your_chat_url',
+        'login_id' => 'your_login_id',
+        'password' => 'your_password',
+    ]
+);
 $result = $driver->authenticate();
 ```
 
 #### Token
 ```php
- use \Gnello\Mattermost\Driver;
+use \Gnello\Mattermost\Driver;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
- // construct your own GuzzleHttp client instance
-$guzzle = new GuzzleHttp/Client(...);
+// construct or discover your own PSR7 instances
+/** @var ClientInterface */
+$httpClient = ...;
+/** @var RequestFactoryInterface */
+$requestFactory = ...;
+/** @var StreamFactoryInterface */
+$streamFactory = ...;
 
-$driver = new Driver($guzzle, [
-    'url' => 'your_chat_url',
-    'token' => 'your_token',
-]);
+$driver = new Driver(
+    $httpClient,
+    $requestFactory,
+    $streamFactory,
+    [
+        'url' => 'your_chat_url',
+        'token' => 'your_token',
+    ]
+);
 
 $result = $driver->authenticate();
 ```
@@ -198,4 +224,3 @@ Don't you see the endpoint you need? Feel free to open an issue or a PR!
 [10]: https://github.com/gnello/laravel-mattermost-driver
 [11]: https://poser.pugx.org/gnello/php-mattermost-driver/downloads
 [12]: https://packagist.org/packages/gnello/php-mattermost-driver
-[13]: https://docs.guzzlephp.org/en/stable/request-options.html

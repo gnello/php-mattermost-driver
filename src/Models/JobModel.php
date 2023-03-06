@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -32,7 +32,7 @@ class JobModel extends AbstractModel
      */
     public function getJobs(array $requestOptions = [])
     {
-        return $this->client->get(self::$endpoint, $requestOptions, RequestOptions::QUERY);
+        return $this->client->get(self::$endpoint, $requestOptions, Client::REQUEST_QUERY);
     }
 
     /**

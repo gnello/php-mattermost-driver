@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -131,7 +131,7 @@ class UserModel extends AbstractModel
      */
     public function deactivateUserAccount($userId, array $requestOptions = [])
     {
-        return $this->client->delete(self::$endpoint . '/' . $userId, $requestOptions, RequestOptions::QUERY);
+        return $this->client->delete(self::$endpoint . '/' . $userId, $requestOptions, Client::REQUEST_QUERY);
     }
 
     /**
@@ -182,7 +182,7 @@ class UserModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
 
-        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $userId . '/image', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**

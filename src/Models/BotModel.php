@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -109,7 +109,7 @@ class BotModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
 
-        return $this->client->post(self::$endpoint . '/' . $botUserId . '/icon', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $botUserId . '/icon', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**

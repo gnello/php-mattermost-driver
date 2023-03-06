@@ -15,7 +15,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -256,7 +256,7 @@ class TeamModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['image']);
 
-        return $this->client->post(self::$endpoint . '/' . $teamId . '/image', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/image', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**
@@ -347,7 +347,7 @@ class TeamModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['file', 'filesize', 'importFrom']);
 
-        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/' . $teamId . '/import', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**
