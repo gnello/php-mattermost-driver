@@ -38,9 +38,11 @@ use Gnello\Mattermost\Models\TeamModel;
 use Gnello\Mattermost\Models\ThreadModel;
 use Gnello\Mattermost\Models\UserModel;
 use Gnello\Mattermost\Models\WebhookModel;
-use GuzzleHttp\Psr7\Response;
-use Pimple\Container;
+use Nyholm\Psr7\Response;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Class Driver
@@ -54,7 +56,7 @@ class Driver
      *
      * @var array
      */
-    private $defaultOptions = [
+    private const DEFAULT_OPTIONS = [
         'scheme' => 'https',
         'basePath' => '/api/v4',
         'url' => 'localhost',
@@ -63,33 +65,30 @@ class Driver
         'token' => null,
     ];
 
-    /**
-     * @var Container
-     */
-    private $container;
+    /** @var array<string, ?string> */
+    private $driverOptions;
+
+    /** @var Client */
+    private $client;
 
     /**
      * @var array
      */
     private $models = [];
 
-    /**
-     * Driver constructor.
-     *
-     * @param Container $container
-     */
-    public function __construct(Container $container)
-    {
-        $driverOptions = $this->defaultOptions;
-
-        if (isset($container['driver'])) {
-            $driverOptions = array_merge($driverOptions, $container['driver']);
-        }
-
-        $container['driver'] = $driverOptions;
-        $container['client'] = new Client($container);
-
-        $this->container = $container;
+    public function __construct(
+        ClientInterface $httpClient,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
+        array $driverOptions
+    ) {
+        $this->driverOptions = array_merge(self::DEFAULT_OPTIONS, $driverOptions);
+        $this->client = new Client(
+            $httpClient,
+            $requestFactory,
+            $streamFactory,
+            $this->driverOptions['scheme'] . '://' . $this->driverOptions['url'] . $this->driverOptions['basePath']
+        );
     }
 
     /**
@@ -97,27 +96,20 @@ class Driver
      */
     public function authenticate()
     {
-        $driverOptions = $this->container['driver'];
-
-        if (isset($driverOptions['token'])) {
-
-            $this->container['client']->setToken($driverOptions['token']);
+        if (isset($this->driverOptions['token'])) {
+            $this->client->setToken($this->driverOptions['token']);
             $response = $this->getUserModel()->getAuthenticatedUser();
-
-        } else if (isset($driverOptions['login_id']) && isset($driverOptions['password'])) {
-
+        } else if (isset($this->driverOptions['login_id']) && isset($this->driverOptions['password'])) {
             $response = $this->getUserModel()->loginToUserAccount([
-                'login_id' => $driverOptions['login_id'],
-                'password' => $driverOptions['password']
+                'login_id' => $this->driverOptions['login_id'],
+                'password' => $this->driverOptions['password']
             ]);
 
             if ($response->getStatusCode() == 200) {
                 $token = $response->getHeader('Token')[0];
-                $this->container['client']->setToken($token);
+                $this->client->setToken($token);
             }
-
         } else {
-
             $response = new Response(401, [], json_encode([
                 "id" => "missing.credentials.",
                 "message" => "You must provide a login_id and password or a valid token.",
@@ -138,7 +130,7 @@ class Driver
     private function getModel($className)
     {
         if (!isset($this->models[$className])) {
-            $this->models[$className] = new $className($this->container['client']);
+            $this->models[$className] = new $className($this->client);
         }
 
         return $this->models[$className];

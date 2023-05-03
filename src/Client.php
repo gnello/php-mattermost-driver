@@ -15,12 +15,12 @@
 
 namespace Gnello\Mattermost;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\RequestOptions;
+use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Nyholm\Psr7\Uri;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Pimple\Container;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Class Client
@@ -29,36 +29,35 @@ use Pimple\Container;
  */
 class Client
 {
-    /**
-     * @var string
-     */
+    const REQUEST_JSON = 'json';
+    const REQUEST_QUERY = 'query';
+    const REQUEST_MULTIPART = 'multipart';
+
+    /** @var string */
     private $baseUri;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $headers = [];
 
-    /**
-     * @var GuzzleClient
-     */
+    /** @var ClientInterface */
     private $client;
 
-    /**
-     * Client constructor.
-     *
-     * @param Container $container
-     */
-    public function __construct(Container $container)
-    {
-        $guzzleOptions = [];
-        if (isset($container['guzzle'])) {
-            $guzzleOptions = $container['guzzle'];
-        }
-        $this->client = new GuzzleClient($guzzleOptions);
+    /** @var RequestFactoryInterface */
+    private $requestFactory;
+    /** @var StreamFactoryInterface */
+    private $streamFactory;
 
-        $options = $container['driver'];
-        $this->baseUri = $options['scheme'] . '://' . $options['url'] . $options['basePath'];
+    /** @param array<string, ?string> $options */
+    public function __construct(
+        ClientInterface $client,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
+        string $baseUrl
+    ) {
+        $this->client = $client;
+        $this->requestFactory = $requestFactory;
+        $this->streamFactory = $streamFactory;
+        $this->baseUri = $baseUrl;
     }
 
     /**
@@ -79,36 +78,49 @@ class Client
     }
 
     /**
-     * @param $options
-     * @param $type
-     * @return array
-     */
-    private function buildOptions($options, $type)
-    {
-        return [
-            RequestOptions::HEADERS => $this->headers,
-            $type => $options,
-        ];
-    }
-
-    /**
      * @param       $method
      * @param       $uri
      * @param       $type
      * @param array $options
      * @return ResponseInterface
      */
-    private function dispatch($method, $uri, $type, array $options = [])
+    private function dispatch(string $method, string $uri, string $type, array $options = [])
     {
-        try {
-            $response = $this->client->{$method}($this->makeUri($uri), $this->buildOptions($options, $type));
-        } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                $response = $e->getResponse();
-            } else {
-                $response = new Response(500, [], $e->getMessage());
-            }
+        $method = strtoupper($method);
+        $request = $this->requestFactory->createRequest($method, $this->makeUri($uri));
+
+        foreach ($this->headers as $key => $value) {
+            $request = $request->withHeader($key, $value);
         }
+
+        switch ($type) {
+            case self::REQUEST_JSON:
+                $request = $request->withHeader('Content-Type', 'application/json');
+                $request = $request->withBody($this->streamFactory->createStream((string) \json_encode($options, \JSON_THROW_ON_ERROR)));
+                break;
+
+            case self::REQUEST_MULTIPART:
+                $builder = new MultipartStreamBuilder($this->streamFactory);
+
+                foreach ($options as $value) {
+                    $builder = $builder->addResource($value['name'], $value['contents'], isset($value['filename']) ? [
+                        'filename' => $value['filename'],
+                    ] : []);
+                }
+
+                $request = $request->withBody($builder->build());
+                $request = $request->withHeader('Content-type', 'multipart/form-data; boundary="' . $builder->getBoundary() . '"');
+                break;
+
+            case self::REQUEST_QUERY:
+                $request = $request->withUri(new Uri($this->makeUri($uri) . '?' . \http_build_query($options, '', '&', \PHP_QUERY_RFC3986)));
+                break;
+
+            default:
+                throw new \RuntimeException("Unexpected type {$type}");
+        }
+
+        $response = $this->client->sendRequest($request);
 
         return $response;
     }
@@ -119,7 +131,7 @@ class Client
      * @param string $type
      * @return ResponseInterface
      */
-    public function get($uri, array $options = [], $type = RequestOptions::QUERY)
+    public function get($uri, array $options = [], $type = self::REQUEST_QUERY)
     {
         return $this->dispatch('get', $uri, $type, $options);
     }
@@ -130,7 +142,7 @@ class Client
      * @param string $type
      * @return ResponseInterface
      */
-    public function post($uri, $options = [], $type = RequestOptions::JSON)
+    public function post($uri, $options = [], $type = self::REQUEST_JSON)
     {
         return $this->dispatch('post', $uri, $type, $options);
     }
@@ -141,7 +153,7 @@ class Client
      * @param string $type
      * @return ResponseInterface
      */
-    public function put($uri, $options = [], $type = RequestOptions::JSON)
+    public function put($uri, $options = [], $type = self::REQUEST_JSON)
     {
         return $this->dispatch('put', $uri, $type, $options);
     }
@@ -152,7 +164,7 @@ class Client
      * @param string $type
      * @return ResponseInterface
      */
-    public function delete($uri, $options = [], $type = RequestOptions::JSON)
+    public function delete($uri, $options = [], $type = self::REQUEST_JSON)
     {
         return $this->dispatch('delete', $uri, $type, $options);
     }

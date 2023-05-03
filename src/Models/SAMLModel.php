@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -42,7 +42,7 @@ class SAMLModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
 
-        return $this->client->post(self::$endpoint . '/certificate/idp', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/idp', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**
@@ -61,7 +61,7 @@ class SAMLModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
 
-        return $this->client->post(self::$endpoint . '/certificate/public', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/public', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**
@@ -80,7 +80,7 @@ class SAMLModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['certificate']);
 
-        return $this->client->post(self::$endpoint . '/certificate/private', $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint . '/certificate/private', $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Gnello\Mattermost\Models;
 
-use GuzzleHttp\RequestOptions;
+use Gnello\Mattermost\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -34,7 +34,7 @@ class PluginModel extends AbstractModel
     {
         $internalRequestOptions = self::buildMultipartDataOptions($requestOptions, ['plugin']);
 
-        return $this->client->post(self::$endpoint, $internalRequestOptions, RequestOptions::MULTIPART);
+        return $this->client->post(self::$endpoint, $internalRequestOptions, Client::REQUEST_MULTIPART);
     }
 
     /**

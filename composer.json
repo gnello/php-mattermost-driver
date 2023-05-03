@@ -17,16 +17,27 @@
     "require": {
         "php": ">=5.5.0",
         "ext-json": "*",
-        "psr/http-message" : "^1.0",
-        "pimple/pimple"    : "~3.0",
-        "guzzlehttp/guzzle": "^6.2|^7.4"
+        "nyholm/psr7": "^1.5",
+        "psr/http-client": "^1.0",
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-message": "^1.0",
+        "psr/http-message-implementation": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-factory-implementation": "^1.0",
+        "php-http/multipart-stream-builder": "^1.2"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.1"
+        "symfony/var-dumper": "^3.1",
+        "guzzlehttp/guzzle": "^7.5"
     },
     "autoload": {
         "psr-4": {
             "Gnello\\Mattermost\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }
