@@ -22,7 +22,7 @@
         "guzzlehttp/guzzle": "^6.2|^7.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.1"
+        "symfony/var-dumper": "^6.4"
     },
     "autoload": {
         "psr-4": {
