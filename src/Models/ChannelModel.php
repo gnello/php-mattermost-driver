@@ -379,7 +379,7 @@ class ChannelModel extends AbstractModel
      */
     public function getMembersMinusGroupMembers($channelId, array $requestOptions)
     {
-        return $this->client->get(self::$endpoint . $channelId . '/members_minus_group_members', $requestOptions);
+        return $this->client->get(self::$endpoint . '/' . $channelId . '/members_minus_group_members', $requestOptions);
     }
 
     /**
@@ -513,7 +513,7 @@ class ChannelModel extends AbstractModel
      */
     public function getChannelMembersCountsForEachGroupThatHasAtLeastOneMember($channelId, array $requestOptions)
     {
-        return $this->client->get(self::$endpoint . $channelId . '/member_counts_by_group', $requestOptions);
+        return $this->client->get(self::$endpoint. '/' . $channelId . '/member_counts_by_group', $requestOptions);
     }
 
     /**
@@ -523,6 +523,16 @@ class ChannelModel extends AbstractModel
      */
     public function getPrivateChannels($teamId, array $requestOptions = [])
     {
-        return $this->client->get(TeamModel::$endpoint . $teamId . '/channels/private', $requestOptions);
+        return $this->client->get(TeamModel::$endpoint. '/' . $teamId . '/channels/private', $requestOptions);
+    }
+
+    /**
+     * @param $userId
+     * @param array $requestOptions
+     * @return ResponseInterface
+     */
+    public function getAllChannelsFromAllTeams($userId, array $requestOptions = [])
+    {
+        return $this->client->get(UserModel::$endpoint. '/' . $userId . '/channels', $requestOptions);
     }
 }
